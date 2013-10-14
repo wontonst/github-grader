@@ -13,3 +13,24 @@
 5. Grader presses Upload which automatically generates issues.
 6. Grader revises grade which automatically updates the grade and creates a new comment specifying what was changed and why.
 7. Grader can view average and other data in graphical form at any time after grading is complete.
+
+#Details
+##.ghg Format
+*subject to revision before 1.0*
+Format for ghg is as followed
+
+Start of document has a YAML-styled variables list
+```
+---
+title: 
+allow-negative: 
+my_var:
+---
+```
+
+Mandatory variables are
++ title - name of the assignment
+
+Non-mandatory settings variables are
++ allow-negative: if true, the calculated score can be negative (if user's score is less than deductions) else defaults to 0
+
