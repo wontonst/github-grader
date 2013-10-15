@@ -1,8 +1,8 @@
 #Procedure for use
-1. Rubric specified in .ghg format (by hand). See [.ghg format](#ghg-format).
-2. Rubric .ghg is converted to .md or .html using GHGrader to post up for students to view.
+1. Rubric specified in [.ghg format][ghg] (by hand).
+2. Rubric .ghg is converted to .md or .html using [GHGrader][grader] to post up for students to view.
 2. Rubric .ghg is distributed to graders.
-3. Grader opens up [GHGrader](#gh-grader) program and opens up the .ghg file.
+3. Grader opens up [GHGrader][grader] program and opens up the .ghg file.
 3. Foreach student the grader has, the grader inputs student username and repository. (Alternative: if repo lives in a github organization, define it in rubric to replace username)
 4. Foreach student
   + Grader grades student and then inputs each requirement grade - comment box for additional information
@@ -11,9 +11,28 @@
 6. Grader revises grade which automatically updates the grade and creates a new comment specifying what was changed and why.
 7. Grader can view average and other data in graphical form at any time after grading is complete.
 
+
+<!--
+**or just use this real-world algorithm**
+```
+function useGhg(User you, Grader[] graders, Student[] students){
+   GithubGrader application = you.installGHG()
+   GHGRubric rubric = you.useTextEditor()
+   HTMLRubric html_rubric = application.convertToHTML(rubric)
+   foreach(Student s in students)
+      s.giveRubric(html_rubric)
+   foreach(Grader g in graders)
+      GithubGrader graderapp = g.installGHG()
+      foreach(Student s in g.getListOfStudentsToGrade)
+         graderapp.inputStudent(s.getGithubUsername(),s.getGithubRepositoryName())
+      foreach(Student s in g.getListOfStudentsToGrade)
+         
+}
+```
+oh wait, people speak english, not pseudocode. derp.-->
 #Details
 ##.ghg Format
-*subject to revision before 1.0*
+*subject to revision before 1.0 release*
 
 Format for ghg is as followed
 
@@ -63,14 +82,17 @@ The indent is a tab (\t) character.
 title: Restaurant v2.1
 allow-negative: false
 organization: usc-csci201-fall2013
+required-for-each: 1: Clear documentation
 ---
 Milestone v2.1A - Fulfill the Requirements of v2
   2: One customer, one waiter
   2: Multiple customers, one waiter
+  $$(required-for-each)
 Milestone v2.1B &ndash; Full Design of All 6 Agents (Cook, Waiter, Host, Customer, Cashier, Market)
   1: You are to develop an interaction diagram for the normative scenario.
   1: The interaction diagram should include message numbers, parameters, good message names.
   2: Full Design document for all the agents. The document must include:
+  $$(required-for-each)
 Deductions
   -10: Not using the agent methodology correctly:
   Shouldn't access fields/values of another agent.
@@ -80,3 +102,11 @@ Deductions
 
 ##GH-Grader
 + Can convert a .ghg into .md or .html.
++ Parses .ghg and displays GUI for graders.
++ Stores grades into .ghgdata file for opening at a later date.
++ Calculates scores and average across students.
+
+
+
+[ghg]: #ghg-format
+[grader]: #gh-grader
