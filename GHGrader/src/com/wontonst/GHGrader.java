@@ -8,7 +8,7 @@ package com.wontonst;
  *
  * @author RoyZheng
  */
-public class ghgrader {
+public class GHGrader {
 
     /**
      * @param args the command line arguments
