@@ -1,13 +1,8 @@
-#Functionality
-+ Points broken down into requirement.
-+ Requirement tagged to topic.
-+ Deductions topic and specific deductions.
-
 #Procedure for use
-1. Rubric specified in .ghg format (by hand).
+1. Rubric specified in .ghg format (by hand). See [.ghg format](#ghg-format).
 2. Rubric .ghg is converted to .md or .html using GHGrader to post up for students to view.
 2. Rubric .ghg is distributed to graders.
-3. Grader opens up GHGrader program and opens up the .ghg file.
+3. Grader opens up [GHGrader](#gh-grader) program and opens up the .ghg file.
 3. Foreach student the grader has, the grader inputs student username and repository. (Alternative: if repo lives in a github organization, define it in rubric to replace username)
 4. Foreach student
   + Grader grades student and then inputs each requirement grade - comment box for additional information
