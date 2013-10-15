@@ -105,7 +105,7 @@ Deductions
 + Parses .ghg and displays GUI for graders.
 + Stores grades into .ghgdata file for opening at a later date.
 + Calculates scores and average across students.
-
++ Interfaces with Github.
 
 
 [ghg]: #ghg-format
