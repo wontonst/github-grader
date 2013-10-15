@@ -4,8 +4,8 @@
 + Deductions topic and specific deductions.
 
 #Procedure for use
-1. Rubric specified in .ghg format using RubricMaker 
-2. Rubric .ghg is converted to .md or .html to post up for students to view.
+1. Rubric specified in .ghg format (by hand).
+2. Rubric .ghg is converted to .md or .html using GHGrader to post up for students to view.
 2. Rubric .ghg is distributed to graders.
 3. Grader opens up GHGrader program and opens up the .ghg file.
 3. Foreach student the grader has, the grader inputs student username and repository. (Alternative: if repo lives in a github organization, define it in rubric to replace username)
@@ -83,6 +83,5 @@ Deductions
   -5: Runtime errors other than concurrent modification errors, which we ignore for now.
 ```
 
-##RubricMaker
-
-##GHGrader
+##GH-Grader
++ Can convert a .ghg into .md or .html.
