@@ -4,7 +4,12 @@
  */
 package com.wontonst.ghg;
 
+import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
 import com.wontonst.patterns.Singleton;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.util.Scanner;
 
 /**
  * @brief loads a .ghg file and converts it into a GHGFile object
@@ -12,8 +17,11 @@ import com.wontonst.patterns.Singleton;
  */
 public class GHGLoader extends Singleton{
     
-    public GHGLoader() {
+    public static GHGFile load(String path) throws FileNotFoundException, IncompleteGHGFileException {
+        Scanner sc = new Scanner(new File(path));
+        GHGFileBuilder builder = new GHGFileBuilder();
         
+        return builder.build();
     }
     
 }

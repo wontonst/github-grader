@@ -11,6 +11,9 @@ import java.util.Map;
  * @author RoyZheng
  */
 public class GHGFile {
-    Map<String,String> custom_variables;
-    
+
+    Map<String, String> custom_variables;
+
+    public GHGFile(GHGFileBuilder builder) {
+    }
 }
