@@ -37,14 +37,14 @@ oh wait, people speak english, not pseudocode. derp.-->
 Format for ghg is as followed
 
 **Start of document has a YAML-styled variables list**
-```
----
-title: 
-allow-negative: 
-organization: 
-my_var:
----
-```
+
+	---
+	title: 
+	allow-negative: 
+	organization: 
+	my_var:
+	---
+
 
 Mandatory variables are
 + title - name of the assignment
@@ -63,42 +63,41 @@ The number represents the point value of the requirement.
 Comments may be included after a requirement declaration.
 
 For example
-```
-Topic1
-  2: Requirement1
-  Comment1
-  Comment2
-  2: Requirement2
-  8: Requirement3
-Topic2
-  10: Requirement4
-  10: Requirement5
-```
+
+	Topic1
+	  2: Requirement1
+	  Comment1
+	  Comment2
+	  2: Requirement2
+	  8: Requirement3
+	Topic2
+	  10: Requirement4
+	  10: Requirement5
 
 Putting this all together, a sample ghg document would look like
 The indent is a tab (\t) character.
-```
----
-title: Restaurant v2.1
-allow-negative: false
-organization: usc-csci201-fall2013
-required-for-each: 1: Clear documentation
----
-Milestone v2.1A - Fulfill the Requirements of v2
-  2: One customer, one waiter
-  2: Multiple customers, one waiter
-  $$(required-for-each)
-Milestone v2.1B &ndash; Full Design of All 6 Agents (Cook, Waiter, Host, Customer, Cashier, Market)
-  1: You are to develop an interaction diagram for the normative scenario.
-  1: The interaction diagram should include message numbers, parameters, good message names.
-  2: Full Design document for all the agents. The document must include:
-  $$(required-for-each)
-Deductions
-  -10: Not using the agent methodology correctly:
-  Shouldn't access fields/values of another agent.
-  Shouldn't pass pointers in messages (other than agent pointers).
-  -5: Runtime errors other than concurrent modification errors, which we ignore for now.
-```
+
+	---
+	title: Restaurant v2.1
+	allow-negative: false
+	organization: usc-csci201-fall2013
+	required-for-each: 1: Clear documentation
+	---
+	Milestone v2.1A - Fulfill the Requirements of v2
+	  2: One customer, one waiter
+	  2: Multiple customers, one waiter
+	  $$(required-for-each)
+	Milestone v2.1B &ndash; Full Design of All 6 Agents (Cook, Waiter, Host, Customer, Cashier, Market)
+	  1: You are to develop an interaction diagram for the normative scenario.
+	  1: The interaction diagram should include message numbers, parameters, good message names.
+	  2: Full Design document for all the agents. The document must include:
+	  $$(required-for-each)
+	Deductions
+	  -10: Not using the agent methodology correctly:
+	  Shouldn't access fields/values of another agent.
+	  Shouldn't pass pointers in messages (other than agent pointers).
+	  -5: Runtime errors other than concurrent modification errors, which we ignore for now.
+
 
 ##GH-Grader
 + Can convert a .ghg into .md or .html.
