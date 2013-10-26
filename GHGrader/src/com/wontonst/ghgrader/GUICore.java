@@ -12,4 +12,7 @@ import javax.swing.JFrame;
  */
 public class GUICore extends JFrame{
     
+    public GUICore(){
+        
+    }
 }

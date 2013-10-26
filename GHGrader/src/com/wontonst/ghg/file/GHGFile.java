@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg;
+package com.wontonst.ghg.file;
 
+import com.wontonst.ghg.FileBuilder;
 import java.util.Map;
 
 /**
@@ -14,6 +15,6 @@ public class GHGFile {
 
     Map<String, String> custom_variables;
 
-    public GHGFile(GHGFileBuilder builder) {
+    public GHGFile(FileBuilder builder) {
     }
 }

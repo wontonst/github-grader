@@ -40,7 +40,7 @@ public class GHGFilePatternsTest {
 
     @Test
     public void testHeaderMarker() {
-        Pattern p = GHGFilePatterns.header_marker;
+        Pattern p = FilePatterns.header_marker;
         Assert.assertTrue(("---").matches(p.pattern()));
         Assert.assertFalse(("--").matches(p.pattern()));
     }

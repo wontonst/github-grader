@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author RoyZheng
  */
-public class IncompleteGHGFileException extends Exception {
+public class IncompleteGHGFileException extends GHGException {
 
     List<String> missing_fields;
 
