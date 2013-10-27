@@ -4,7 +4,10 @@
  */
 package com.wontonst.ghg.file;
 
-import com.wontonst.ghg.FileBuilder;
+import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghg.parser.FileBuilder;
+import com.wontonst.util.BuildString;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,6 +18,13 @@ public class GHGFile {
 
     Map<String, String> custom_variables;
 
-    public GHGFile(FileBuilder builder) {
+    public GHGFile(FileBuilder builder) throws IncompleteGHGFileException {
+        StringBuilder sb = new StringBuilder();
+        List<String> checked = builder.check();
+        if (!checked.isEmpty()) {
+            throw new IncompleteGHGFileException(checked, "Missing mandatory field [" + BuildString.Build(checked, " ") + "]");
+        }
+        
+        
     }
 }

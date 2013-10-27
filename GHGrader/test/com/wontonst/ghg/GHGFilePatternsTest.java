@@ -4,6 +4,7 @@
  */
 package com.wontonst.ghg;
 
+import com.wontonst.ghg.parser.FilePatterns;
 import java.util.regex.Pattern;
 import org.junit.After;
 import org.junit.AfterClass;

@@ -2,39 +2,41 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg;
+package com.wontonst.ghg.parser;
 
 import com.wontonst.ghg.file.GHGFile;
 import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
-import com.wontonst.ghg.file.Requirement;
 import com.wontonst.ghg.file.Topic;
 import com.wontonst.ghg.file.Variables;
-import com.wontonst.util.BuildString;
+import com.wontonst.patterns.Builder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
  * @author RoyZheng
  */
-public class FileBuilder {
+public class FileBuilder implements Builder<GHGFile> {
 
     Variables v = new Variables();
     List<Topic> topics;
-    List<Requirement> requirements;
+    
+    TopicBuilder current_topic = null;
+    
     String[] mandatory_fields = {"TITLE"};
 
     public FileBuilder() {
     }
 
-    public void adTopic(String s) {
-        this.topics.add(new Topic(s));
+    public void addTopic(String s) {
+       if(current_topic != null){
+           this.topics.add(this.current_topic.build());
+       }
+           this.current_topic = new TopicBuilder();
+           this.current_topic.addTitle(s);
     }
 
     public void addRequirement(String s) {
-        
     }
 
     public void addComment(String s) {
@@ -66,11 +68,6 @@ public class FileBuilder {
     }
 
     public GHGFile build() throws IncompleteGHGFileException {
-        StringBuilder sb = new StringBuilder();
-        List<String> checked = this.check();
-        if (!checked.isEmpty()) {
-            throw new IncompleteGHGFileException(checked, "Missing mandatory field [" + BuildString.Build(checked, " ") + "]");
-        }
         return new GHGFile(this);
     }
 }

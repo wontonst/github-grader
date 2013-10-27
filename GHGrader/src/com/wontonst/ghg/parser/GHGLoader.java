@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg;
+package com.wontonst.ghg.parser;
 
+import com.wontonst.ghg.parser.FileBuilder;
 import com.wontonst.ghg.file.GHGFile;
 import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
 import com.wontonst.ghg.exceptions.MalformedGHGFileException;
