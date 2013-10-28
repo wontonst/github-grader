@@ -4,6 +4,8 @@
  */
 package com.wontonst.ghg.parser;
 
+import com.wontonst.ghg.exceptions.IncompleteRequirementException;
+import com.wontonst.ghg.exceptions.IncompleteTopicException;
 import com.wontonst.ghg.file.Requirement;
 import com.wontonst.ghg.file.Topic;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class TopicBuilder extends BuilderBase<Topic> {
     List<Requirement> requirements = new ArrayList<Requirement>();
     RequirementBuilder current_requirement = null;
 
-    public void addRequirement(String s) throws Exception {
+    public void addRequirement(String s) throws IncompleteRequirementException  {
         if (current_requirement != null) {
             this.requirements.add(this.current_requirement.build());
         }
@@ -35,7 +37,7 @@ public class TopicBuilder extends BuilderBase<Topic> {
     }
 
     @Override
-    public Topic build() {
+    public Topic build() throws IncompleteTopicException {
         return new Topic(this);
     }
 

@@ -6,6 +6,7 @@ package com.wontonst.ghg.parser;
 
 import com.wontonst.ghg.file.GHGFile;
 import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghg.exceptions.IncompleteTopicException;
 import com.wontonst.ghg.file.Topic;
 import com.wontonst.ghg.file.Variables;
 import com.wontonst.patterns.Builder;
@@ -26,7 +27,7 @@ public class FileBuilder implements Builder<GHGFile> {
     public FileBuilder() {
     }
 
-    public void addTopic(String s) {
+    public void addTopic(String s) throws IncompleteTopicException {
         if (current_topic != null) {
             this.topics.add(this.current_topic.build());
         }
