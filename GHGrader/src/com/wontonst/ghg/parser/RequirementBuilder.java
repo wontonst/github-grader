@@ -4,23 +4,42 @@
  */
 package com.wontonst.ghg.parser;
 
+import com.wontonst.ghg.file.Comment;
 import com.wontonst.ghg.file.Requirement;
 import com.wontonst.patterns.Builder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author RoyZheng
  */
-public class RequirementBuilder implements Builder<Requirement> {
+public class RequirementBuilder extends BuilderBase<Requirement> {
+
+    List<Comment> comments = new ArrayList<Comment>();
+
+    public RequirementBuilder() {
+    }
+
+    public void addComment(String s) {
+        this.comments.add(new Comment(s));
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
+    }
 
     @Override
     public Requirement build() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Requirement(this);
     }
 
     @Override
     public List<String> check() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> errors = new ArrayList<String>();
+        if (this.title == null || this.title.isEmpty()) {
+            errors.add("title");
+        }
+        return errors;
     }
 }

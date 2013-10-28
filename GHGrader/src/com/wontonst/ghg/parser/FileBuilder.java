@@ -18,28 +18,28 @@ import java.util.List;
  */
 public class FileBuilder implements Builder<GHGFile> {
 
-    Variables v = new Variables();
+    Variables variables = new Variables();
     List<Topic> topics;
-    
     TopicBuilder current_topic = null;
-    
     String[] mandatory_fields = {"TITLE"};
 
     public FileBuilder() {
     }
 
     public void addTopic(String s) {
-       if(current_topic != null){
-           this.topics.add(this.current_topic.build());
-       }
-           this.current_topic = new TopicBuilder();
-           this.current_topic.addTitle(s);
+        if (current_topic != null) {
+            this.topics.add(this.current_topic.build());
+        }
+        this.current_topic = new TopicBuilder();
+        this.current_topic.addTitle(s);
     }
 
-    public void addRequirement(String s) {
+    public void addRequirement(String s) throws Exception{
+        this.current_topic.addRequirement(s);
     }
 
     public void addComment(String s) {
+        this.current_topic.addComment(s);
     }
 
     public void addVariable(MapEntry me) {
@@ -47,7 +47,7 @@ public class FileBuilder implements Builder<GHGFile> {
     }
 
     public void addVariable(String name, String variable) {
-        this.v.add(name, variable);
+        this.variables.add(name, variable);
     }
 
     /**
@@ -59,8 +59,8 @@ public class FileBuilder implements Builder<GHGFile> {
         for (String s : this.mandatory_fields) {
             missing.add(s);
         }
-        for (String key : this.v.keySet()) {
-            if (missing.contains(key) && !this.v.get(key).isEmpty()) {
+        for (String key : this.variables.keySet()) {
+            if (missing.contains(key) && !this.variables.get(key).isEmpty()) {
                 missing.remove(key);
             }
         }
@@ -69,5 +69,13 @@ public class FileBuilder implements Builder<GHGFile> {
 
     public GHGFile build() throws IncompleteGHGFileException {
         return new GHGFile(this);
+    }
+
+    public Variables getVariables() {
+        return this.variables;
+    }
+
+    public List<Topic> getTopics() {
+        return this.topics;
     }
 }

@@ -16,7 +16,8 @@ import java.util.Map;
  */
 public class GHGFile {
 
-    Map<String, String> custom_variables;
+    Variables variables;
+    List<Topic> topics;
 
     public GHGFile(FileBuilder builder) throws IncompleteGHGFileException {
         StringBuilder sb = new StringBuilder();
@@ -24,7 +25,8 @@ public class GHGFile {
         if (!checked.isEmpty()) {
             throw new IncompleteGHGFileException(checked, "Missing mandatory field [" + BuildString.Build(checked, " ") + "]");
         }
-        
-        
+
+        this.variables = builder.getVariables();
+        this.topics = builder.getTopics();
     }
 }

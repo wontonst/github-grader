@@ -6,17 +6,33 @@ package com.wontonst.ghg.parser;
 
 import com.wontonst.ghg.file.Requirement;
 import com.wontonst.ghg.file.Topic;
-import com.wontonst.patterns.Builder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author RoyZheng
  */
-public class TopicBuilder implements Builder<Topic> {
+public class TopicBuilder extends BuilderBase<Topic> {
 
-    String title;
     List<Requirement> requirements = new ArrayList<Requirement>();
+    RequirementBuilder current_requirement = null;
+
+    public void addRequirement(String s) throws Exception {
+        if (current_requirement != null) {
+            this.requirements.add(this.current_requirement.build());
+        }
+        this.current_requirement = new RequirementBuilder();
+        this.current_requirement.addTitle(s);
+    }
+
+    public void addComment(String s) {
+        this.current_requirement.addComment(s);
+    }
+
+    public List<Requirement> getRequirements() {
+        return this.requirements;
+    }
 
     @Override
     public Topic build() {
@@ -25,6 +41,13 @@ public class TopicBuilder implements Builder<Topic> {
 
     @Override
     public List<String> check() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> errors = new ArrayList<String>();
+        if (this.title.isEmpty()) {
+            errors.add("Topic does not contain a title");
+        }
+        if (this.requirements.isEmpty()) {
+            errors.add("Topic " + this.getTitle() + " does not contain any requirements.");
+        }
+        return errors;
     }
 }
