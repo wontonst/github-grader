@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class FileBuilder implements Builder<GHGFile> {
 
-    Variables variables = new Variables();
-    List<Topic> topics;
-    TopicBuilder current_topic = null;
-    String[] mandatory_fields = {"TITLE"};
+    protected Variables variables = new Variables();
+    protected List<Topic> topics;
+    protected TopicBuilder current_topic = null;
+    protected String[] mandatory_fields = {"TITLE"};
 
     public FileBuilder() {
     }
@@ -34,7 +34,7 @@ public class FileBuilder implements Builder<GHGFile> {
         this.current_topic.addTitle(s);
     }
 
-    public void addRequirement(String s) throws Exception{
+    public void addRequirement(String s) throws Exception {
         this.current_topic.addRequirement(s);
     }
 

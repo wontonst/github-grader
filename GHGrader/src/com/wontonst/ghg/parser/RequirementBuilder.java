@@ -4,6 +4,7 @@
  */
 package com.wontonst.ghg.parser;
 
+import com.wontonst.ghg.exceptions.IncompleteRequirementException;
 import com.wontonst.ghg.file.Comment;
 import com.wontonst.ghg.file.Requirement;
 import com.wontonst.patterns.Builder;
@@ -30,7 +31,7 @@ public class RequirementBuilder extends BuilderBase<Requirement> {
     }
 
     @Override
-    public Requirement build() throws Exception {
+    public Requirement build() throws IncompleteRequirementException {
         return new Requirement(this);
     }
 

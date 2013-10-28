@@ -19,13 +19,12 @@ import java.util.Scanner;
 public class GHGLoader extends Singleton {
 
     public static GHGFile load(String path) throws FileNotFoundException, IncompleteGHGFileException, MalformedGHGFileException {
-        Scanner sc = new Scanner(path);
+        GHGScanner sc = new GHGScanner(path);
         FileBuilder builder = new FileBuilder();
 
-        int line_number = 1;
         String line = sc.nextLine();
         if (!line.equals("---")) {
-            throw new MalformedGHGFileException("File does not start with proper yaml-styled variables declaration", line, line_number);
+            throw new MalformedGHGFileException("File does not start with proper yaml-styled variables declaration", line, sc.getLineNumber());
         }
         while (true) {//while we're still in the variables header block
             line = sc.nextLine();
@@ -34,16 +33,19 @@ public class GHGLoader extends Singleton {
             }
             MapEntry me = FilePatterns.getHeaderVariable(line);
             if (me == null) {
-                throw new MalformedGHGFileException("Yaml-styled variable declaration contains an error", line, line_number);
+                throw new MalformedGHGFileException("Yaml-styled variable declaration contains an error", line, sc.getLineNumber());
             }
             builder.addVariable(me);
         }
+        line = sc.nextLine();
         while (true) {
-            line = sc.nextLine();
             if (line.isEmpty()) {
                 break;
             }
-            
+            if (line.charAt(0) == '\t') {
+                throw new MalformedGHGFileException("Topic " + line + " cannot start with a tab.", line, sc.getLineNumber());
+            }
+            builder.addTopic(line.trim());
         }
         return builder.build();
     }
