@@ -27,7 +27,7 @@ public class GHGLoader extends Singleton {
         if (!line.equals("---")) {
             throw new MalformedGHGFileException("File does not start with proper yaml-styled variables declaration", line, line_number);
         }
-        while (true) {
+        while (true) {//while we're still in the variables header block
             line = sc.nextLine();
             if (line.equals("---")) {
                 break;
@@ -38,7 +38,13 @@ public class GHGLoader extends Singleton {
             }
             builder.addVariable(me);
         }
-
+        while (true) {
+            line = sc.nextLine();
+            if (line.isEmpty()) {
+                break;
+            }
+            
+        }
         return builder.build();
     }
 }
