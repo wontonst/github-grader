@@ -10,7 +10,14 @@ package com.wontonst.ghg.exceptions;
  */
 public class IncompleteRequirementException extends GHGException {
 
-    public IncompleteRequirementException(String s) {
-        super(s);
+    String requirement;
+
+    public IncompleteRequirementException(String requirement, String msg) {
+        super(msg);
+        this.requirement = requirement;
+    }
+
+    public String getRequirement() {
+        return requirement == null || requirement.isEmpty() ? "[REQUIREMENT TITLE NOT SET]" : this.requirement;
     }
 }

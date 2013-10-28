@@ -6,6 +6,7 @@ package com.wontonst.ghg.parser;
 
 import com.wontonst.ghg.file.GHGFile;
 import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghg.exceptions.IncompleteRequirementException;
 import com.wontonst.ghg.exceptions.IncompleteTopicException;
 import com.wontonst.ghg.file.Topic;
 import com.wontonst.ghg.file.Variables;
@@ -22,7 +23,6 @@ public class FileBuilder implements Builder<GHGFile> {
     protected Variables variables = new Variables();
     protected List<Topic> topics;
     protected TopicBuilder current_topic = null;
-    protected String[] mandatory_fields = {"TITLE"};
 
     public FileBuilder() {
     }
@@ -35,7 +35,7 @@ public class FileBuilder implements Builder<GHGFile> {
         this.current_topic.addTitle(s);
     }
 
-    public void addRequirement(String s) throws Exception {
+    public void addRequirement(String s) throws IncompleteRequirementException  {
         this.current_topic.addRequirement(s);
     }
 
@@ -56,16 +56,6 @@ public class FileBuilder implements Builder<GHGFile> {
      * @return missing mandatory fields
      */
     public List<String> check() {
-        List<String> missing = new ArrayList<String>();
-        for (String s : this.mandatory_fields) {
-            missing.add(s);
-        }
-        for (String key : this.variables.keySet()) {
-            if (missing.contains(key) && !this.variables.get(key).isEmpty()) {
-                missing.remove(key);
-            }
-        }
-        return missing;
     }
 
     public GHGFile build() throws IncompleteGHGFileException {

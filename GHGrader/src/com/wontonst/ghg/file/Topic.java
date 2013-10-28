@@ -13,12 +13,15 @@ import java.util.List;
  *
  * @author RoyZheng
  */
-public class Topic extends Component{
+public class Topic extends Component {
+
     List<Requirement> requirements;
-    
-    public Topic(TopicBuilder builder) throws IncompleteTopicException{
+
+    public Topic(TopicBuilder builder) throws IncompleteTopicException {
         List<String> c = builder.check();
-        if(c != null && !c.isEmpty())throw new IncompleteTopicException("Missing mandatory field [" + BuildString.Build(c, " ") + "]");
+        if (c != null && !c.isEmpty()) {
+            throw new IncompleteTopicException(builder.getTitle(), "Missing mandatory field [" + BuildString.Build(c, " ") + "]");
+        }
         this.title = builder.getTitle();
         this.requirements = builder.getRequirements();
     }

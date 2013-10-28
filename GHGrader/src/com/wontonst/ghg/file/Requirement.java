@@ -20,7 +20,7 @@ public class Requirement extends Component {
     public Requirement(RequirementBuilder builder) throws IncompleteRequirementException {
         List<String> c = builder.check();
         if (builder.check() != null && !c.isEmpty()) {
-            throw new IncompleteRequirementException("Missing mandatory field [" + BuildString.Build(c, " ") + "]");
+            throw new IncompleteRequirementException(builder.getTitle(),"Missing mandatory field [" + BuildString.Build(c, " ") + "]");
         }
         this.title = builder.getTitle();
         this.comments = builder.getComments();

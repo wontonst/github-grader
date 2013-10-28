@@ -10,7 +10,14 @@ package com.wontonst.ghg.exceptions;
  */
 public class IncompleteTopicException extends GHGException {
 
-    public IncompleteTopicException(String s) {
-        super(s);
+    String topic;
+
+    public IncompleteTopicException(String topic, String msg) {
+        super(msg);
+        this.topic = topic;
+    }
+
+    public String getTopic() {
+        return topic == null || topic.isEmpty() ? "[TOPIC TITLE NOT SET]" : topic;
     }
 }

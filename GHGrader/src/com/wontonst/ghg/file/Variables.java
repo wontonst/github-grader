@@ -4,6 +4,7 @@
  */
 package com.wontonst.ghg.file;
 
+import com.wontonst.ghg.parser.VariablesBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -16,13 +17,15 @@ public class Variables {
 
     Map<String, String> custom_variables = new HashMap<String, String>();
 
-    public String get(String k){
+    public Variables(VariablesBuilder builder) {
+        this.custom_variables = builder.getVariables();
+    }
+
+    public String get(String k) {
         return this.custom_variables.get(k);
     }
-    public void add(String k, String v) {
-        this.custom_variables.put(k, v);
-    }
-    public Set<String> keySet(){
+
+    public Set<String> keySet() {
         return this.custom_variables.keySet();
     }
 }
