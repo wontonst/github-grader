@@ -4,8 +4,11 @@
  */
 package com.wontonst.ghg.file;
 
+import com.wontonst.ghg.exceptions.IncompleteVariablesException;
 import com.wontonst.ghg.parser.VariablesBuilder;
+import com.wontonst.util.BuildString;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,7 +20,11 @@ public class Variables {
 
     Map<String, String> custom_variables = new HashMap<String, String>();
 
-    public Variables(VariablesBuilder builder) {
+    public Variables(VariablesBuilder builder) throws IncompleteVariablesException {
+        List<String> c = builder.check();
+        if (c != null && !c.isEmpty()) {
+            throw new IncompleteVariablesException("Missing mandatory field [" + BuildString.Build(c, " ") + "]", c);
+        }
         this.custom_variables = builder.getVariables();
     }
 

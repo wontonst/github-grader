@@ -23,7 +23,7 @@ public class GHGFile {
         StringBuilder sb = new StringBuilder();
         List<String> checked = builder.check();
         if (!checked.isEmpty()) {
-            throw new IncompleteGHGFileException(checked, "Missing mandatory field [" + BuildString.Build(checked, " ") + "]");
+            throw new IncompleteGHGFileException(checked, "Errors found: [" + BuildString.Build(checked, " ") + "]");
         }
 
         this.variables = builder.getVariables();

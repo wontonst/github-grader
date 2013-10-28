@@ -46,4 +46,8 @@ public class VariablesBuilder implements Builder<Variables> {
         }
         return missing;
     }
+
+    public Map<String, String> getVariables() {
+        return this.variables;
+    }
 }
