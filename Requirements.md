@@ -18,8 +18,8 @@ function useGhg(User you, Grader[] graders, Student[] students){
 oh wait, people speak english, not pseudocode. derp.-->
 
 #GitHub Interactions
-+ Will use eclipse [eGit-Github][https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core] GitHub API library.[x]
-+ Must be able to create new issues.[ ]
++ Will use eclipse [eGit-Github][https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core] GitHub API library.
++ Must be able to create new issues.
 + Must be able to modify existing issues.
 	+ There must be a way of identifying issues that were created.
 	+ Alternatively, a list of issues created can be stored locally in the save file.
@@ -28,13 +28,44 @@ oh wait, people speak english, not pseudocode. derp.-->
 
 #GUI
 + Must have menu bar
-	+ New option to open a .ghg file.
-		+ Upon opening a valid ghg file, the program will prompt for inputting student repository information.
-	+ Open option to open existing .ghd file.
-	+ Save option to save .ghd file.
-		+ Becomes save as if file hasn't been saved before.
-	+ Save as option to save as a new .ghd file.
-	+ Close option to exit program.
+	+ File menu
+		+ *New* option to open a .ghg file.
+			+ Upon opening a valid ghg file, the program will prompt for inputting student repository information.
+		+ *Open* option to open existing .ghd file.
+		+ *Save* option to save .ghd file.
+			+ Becomes save as if file hasn't been saved before.
+		+ *Save* as option to save as a new .ghd file.
+		+ *Close* option to exit program.
+	+ GitHub menu
+		+ *Send new issue* option to create new issue for the current student.
+			+ If already pushed, grey out
+			+ If not completely graded, display error
+		+ *Revise issue* option to revise issue for the current student.
+			+ If not completely graded, display error
+			+ If nothing has changed, grey out
+	+ View Menu
+		+ *Statistics* option to view average, stddev, etc
+		+ *View deductions* - option to view most popular deductions in a pi chart.
++ Frame for inputing a list of student usernames and repository names.
++ Alternate frame for inputting a list of student repository names only.
++ GUI version of a requirement laid out for grading
+	+ Each requirement has 3 buttons next to it
+		+ Add 1 point
+			+ For positive point value requirements, cannot exceed max requirement points.
+			+ For negative point value requirements, cannot exceed 0.
+		+ Remove 1 point
+			+ For positive point value requirements, cannot go below zero.
+			+ For negative point value requirements, cannot go below point value.
+		+ Remove all
+			+ For positive point value requirement, sets to zero.
+			+ For negative point value requirement, sets to point value.
++ CardLayout with next/back with grading form for each student.
++ Information section on each CardLayout
+	+ Status information displayed
+		+ (Red) NOT STARTED
+		+ (Green) DONE
+		+ (RED) NEEDS REVISION
++ "Mark for revision" button
 
 #GHD Save File
 
