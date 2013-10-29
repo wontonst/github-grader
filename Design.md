@@ -101,6 +101,7 @@ The indent is a tab (\t) character.
 
 ##GH-Grader
 + Can convert a .ghg into .md or .html.
++ Can optionally add variables in yaml header block for Jekyll.
 + Parses .ghg and displays GUI for graders.
 + Stores grades into .ghgdata file for opening at a later date.
 + Calculates scores and average across students.

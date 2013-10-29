@@ -8,6 +8,9 @@ package com.wontonst.ghg.file;
  *
  * @author RoyZheng
  */
-public class Component {
+public abstract class Component {
+
     protected String title;
+
+    public abstract String toString(Format f);
 }

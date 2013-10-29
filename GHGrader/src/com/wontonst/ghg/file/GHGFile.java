@@ -29,14 +29,43 @@ public class GHGFile {
         this.variables = builder.getVariables();
         this.topics = builder.getTopics();
     }
-    @Override
-    public String toString(){
+
+    public String toString(Format f) {
         StringBuilder b = new StringBuilder();
+
+        switch (f) {
+            case MD:
+            case HTML:
+            case JEKYLL_MD:
+            case JEKYLL_HTML:
+        }
         this.variables.toString(b);
-        for(Topic t : this.topics){
+
+        for (Topic t : this.topics) {
             b.append("\n");
             t.toString(b);
         }
         return b.toString();
+    }
+
+    public String toMd() {
+        StringBuilder b = new StringBuilder();
+        for (Topic t : this.topics) {
+            b.append(t.toMd());
+            b.append("\n");
+        }
+        return b.toString();
+    }
+
+    public String toJson() {
+    }
+
+    public String toHtml() {
+    }
+
+    public String toJekyllMd() {
+    }
+
+    public String toJekyllHtml() {
     }
 }
