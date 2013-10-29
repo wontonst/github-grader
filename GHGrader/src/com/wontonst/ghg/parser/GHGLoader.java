@@ -60,7 +60,9 @@ public class GHGLoader extends Singleton {
                     }
                     line = sc.nextLine();
                 }
+                //System.out.println("processing " + line);
                 grab = false;
+
                 switch (state) {
                     case TOPIC:
                         if (line.charAt(0) == '\t') {
@@ -75,49 +77,27 @@ public class GHGLoader extends Singleton {
                             state = Block.TOPIC;
                             break;
                         }
+                        //System.out.println("adding " + line);
                         builder.addRequirement(line.trim());
                         state = Block.COMMENT;
                         grab = true;
+                        break;
                     case COMMENT:
                         if (line.charAt(0) != '\t') {
                             state = Block.TOPIC;
                             break;
                         }
                         if (!Comment.isComment(line)) {
+                            //System.out.println(line + "isnt");
                             state = Block.REQUIREMENT;
                             break;
                         }
+                        //System.out.println(line + "is");
                         builder.addComment(line.trim());
                         grab = true;
+                        break;
                 }
             }
-            /*
-             while (true) {//grab topic
-             //          if (line.isEmpty() || !sc.hasNextLine()) {
-             //              break;
-             //           }
-             //             line = sc.nextLine();
-             //            if (line.charAt(0) == '\t') {
-             //                throw new MalformedGHGFileException("Topic " + line + " cannot start with a tab.", line, sc.getLineNumber());
-             //           }
-             //          builder.addTopic(line.trim());
-             while (true) {//get requirements
-             //           line = sc.nextLine();
-             //             if (line.charAt(0) != '\t' || line.isEmpty()) {
-             //                 break;
-             //             }
-             //               builder.addRequirement(line.trim());
-
-             while (sc.hasNextLine()) {//get comments
-             //            line = sc.nextLine();
-             //        if (line.isEmpty() || line.charAt(0) != '\t' || !Comment.isComment(line)) {
-             //             break;
-             //         }
-             builder.addComment(line.trim());
-             line = null;
-             }
-             }
-             }*/
             return builder.build();
         } catch (IncompleteTopicException ex) {
             throw new MalformedGHGFileException("Topic \"" + ex.getTopic() + "\" has an error: " + ex.getMessage(), line, sc.getLineNumber());
