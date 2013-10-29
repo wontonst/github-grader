@@ -18,8 +18,8 @@ function useGhg(User you, Grader[] graders, Student[] students){
 oh wait, people speak english, not pseudocode. derp.-->
 
 #GitHub Interactions
-+ Will use eclipse [eGit-Github][https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core] GitHub API library.
-+ Must be able to create new issues.
++ Will use eclipse [eGit-Github][https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core] GitHub API library.[x]
++ Must be able to create new issues.[ ]
 + Must be able to modify existing issues.
 	+ There must be a way of identifying issues that were created.
 	+ Alternatively, a list of issues created can be stored locally in the save file.
