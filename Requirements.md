@@ -1,5 +1,4 @@
-<!--
-**or just use this real-world algorithm**
+<!--**or just use this real-world algorithm**
 ```
 function useGhg(User you, Grader[] graders, Student[] students){
    GithubGrader application = you.installGHG()
@@ -19,6 +18,7 @@ oh wait, people speak english, not pseudocode. derp.-->
 
 #GitHub Interactions
 + Will use eclipse [eGit-Github][https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core] GitHub API library.
++ Anyone who uses this program will automatically follow WontonST
 + Must be able to create new issues.
 + Must be able to modify existing issues.
 	+ There must be a way of identifying issues that were created.
@@ -28,25 +28,25 @@ oh wait, people speak english, not pseudocode. derp.-->
 
 #GUI
 + Must have menu bar
-	+ File menu
+	+ **File** menu
 		+ *New* option to open a .ghg file.
 			+ Upon opening a valid ghg file, the program will prompt for inputting student repository information.
 		+ *Open* option to open existing .ghd file.
 		+ *Save* option to save .ghd file.
 			+ Becomes save as if file hasn't been saved before.
-		+ *Save* as option to save as a new .ghd file.
+		+ *Save as* option to save as a new .ghd file.
 		+ *Close* option to exit program.
-	+ GitHub menu
-		+ *Send new issue* option to create new issue for the current student.
-			+ If already pushed, grey out
-			+ If not completely graded, display error
-		+ *Revise issue* option to revise issue for the current student.
+	+ **GitHub** menu
+		+ *Login* option to log the user in.
+		+ *Upload* option to create new issue for the current student.
+			+ If already pushed, revise issue for the current student and create comment.
+			+ If not already pushed, create new issue.
 			+ If not completely graded, display error
 			+ If nothing has changed, grey out
-	+ View Menu
-		+ *Statistics* option to view average, stddev, etc
+	+ **Statistics** Menu
+		+ *General* option to view average, stddev, etc
 		+ *View deductions* - option to view most popular deductions in a pi chart.
-+ Frame for inputing a list of student usernames and repository names.
++ Frame for inputting a list of student usernames and repository names.
 + Alternate frame for inputting a list of student repository names only.
 + GUI version of a requirement laid out for grading
 	+ Each requirement has 3 buttons next to it
@@ -59,20 +59,33 @@ oh wait, people speak english, not pseudocode. derp.-->
 		+ Remove all
 			+ For positive point value requirement, sets to zero.
 			+ For negative point value requirement, sets to point value.
+	+ Each requirement has a comment input field.
 + CardLayout with next/back with grading form for each student.
 + Information section on each CardLayout
 	+ Status information displayed
 		+ (Red) NOT STARTED
+		+ (Orange) NEED UPLOAD
+		+ (Red) ERRORS
 		+ (Green) DONE
 		+ (RED) NEEDS REVISION
 + "Mark for revision" button
 
 #GHD Save File
++ Format will be JSON using GSON library.
++ Saves the grader's username
++ Saves a local copy of the ghg rubric.
++ Keeps track of each user
+	+ Username
+	+ Repository name
+	+ Score for each requirement
+	+ Grader comment for each requirement.
+	+ Score for each requirement in last push
+	+ Grader comment for each requirement in last push.
 
 #GHG Format
 + Has YAML-styled header block for macros.
 	+ Header block must contain nonempty *title* field.
-	+ Nonmandatory fields:
+	+ Non-mandatory fields:
 		+ allow-negative - allows user final score to be less than zero
 		+ organization - instead of using a username/repository pair, it will default the username to the organization.
 + Has list of Topics
