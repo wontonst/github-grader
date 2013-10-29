@@ -24,17 +24,17 @@ public class FileBuilder implements Builder<GHGFile> {
 
     protected Variables variables;
     protected VariablesBuilder variables_builder = new VariablesBuilder();
-    protected List<Topic> topics;
+    protected List<Topic> topics = new ArrayList<Topic>();
     protected TopicBuilder current_topic = null;
 
     public FileBuilder() {
     }
 
     public void finalizeVariables() throws IncompleteVariablesException {
-        this.variables = new Variables(variables_builder);
+        this.variables = this.variables_builder.build();
     }
 
-    public void addTopic(String s) throws IncompleteTopicException {
+    public void addTopic(String s) throws IncompleteTopicException, IncompleteRequirementException {
         if (current_topic != null) {
             this.topics.add(this.current_topic.build());
         }
@@ -70,10 +70,11 @@ public class FileBuilder implements Builder<GHGFile> {
         return errors;
     }
 
-    public GHGFile build() throws IncompleteGHGFileException {
+    public GHGFile build() throws IncompleteGHGFileException, IncompleteTopicException, IncompleteRequirementException {
         if (this.variables == null) {
             throw new IncompleteGHGFileException("Variables object not initialized - this is a programmer error.");
         }
+        this.topics.add(this.current_topic.build());
         return new GHGFile(this);
     }
 

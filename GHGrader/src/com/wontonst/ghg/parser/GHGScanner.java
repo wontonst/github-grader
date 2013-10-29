@@ -4,6 +4,8 @@
  */
 package com.wontonst.ghg.parser;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -15,16 +17,26 @@ public class GHGScanner {
     protected int line_number = 0;
     protected Scanner scanner;
 
-    public GHGScanner(String f) {
-        this.scanner = new Scanner(f);
+    /**
+     * Customer file scanner to keep track of line number.
+     *
+     * @param f
+     */
+    public GHGScanner(String f) throws FileNotFoundException {
+        this.scanner = new Scanner(new File(f));
     }
 
     public int getLineNumber() {
         return this.line_number;
     }
 
+    public boolean hasNextLine() {
+        return this.scanner.hasNextLine();
+    }
+
     public String nextLine() {
-        line_number++;
+       line_number++;
+        //System.out.println(this.line_number);
         return this.scanner.nextLine();
     }
 }

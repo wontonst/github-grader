@@ -18,7 +18,7 @@ public class FilePatterns {
 
     public static MapEntry getHeaderVariable(String line) {
         String key = line.substring(0, line.indexOf(":"));
-        String value = line.substring(line.indexOf(":")).trim();
+        String value = line.substring(line.indexOf(":")+1).trim();
         if (key.indexOf(" ") != -1) {
             return null;
         }

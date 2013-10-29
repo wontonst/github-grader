@@ -4,16 +4,15 @@
  */
 package com.wontonst.ghg.parser;
 
-import com.wontonst.ghg.parser.FileBuilder;
 import com.wontonst.ghg.file.GHGFile;
 import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghg.exceptions.IncompleteRequirementException;
 import com.wontonst.ghg.exceptions.IncompleteTopicException;
+import com.wontonst.ghg.exceptions.IncompleteVariablesException;
 import com.wontonst.ghg.exceptions.MalformedGHGFileException;
+import com.wontonst.ghg.file.Comment;
 import com.wontonst.patterns.Singleton;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @brief loads a .ghg file and converts it into a GHGFile object
@@ -26,35 +25,74 @@ public class GHGLoader extends Singleton {
         FileBuilder builder = new FileBuilder();
 
         String line = sc.nextLine();
-        if (!line.equals("---")) {
-            throw new MalformedGHGFileException("File does not start with proper yaml-styled variables declaration", line, sc.getLineNumber());
-        }
-        while (true) {//while we're still in the variables header block
-            line = sc.nextLine();
-            if (line.equals("---")) {
-                break;
+        try {
+            if (!line.equals("---")) {
+                throw new MalformedGHGFileException("File does not start with proper yaml-styled variables declaration", line, sc.getLineNumber());
             }
-            MapEntry me = FilePatterns.getHeaderVariable(line);
-            if (me == null) {
-                throw new MalformedGHGFileException("Yaml-styled variable declaration contains an error", line, sc.getLineNumber());
-            }
-            builder.addVariable(me);
-        }
-        line = sc.nextLine();
-        while (true) {//grab topic/requirement/comments
-            if (line.isEmpty()) {
-                break;
-            }
-            if (line.charAt(0) == '\t') {
-                throw new MalformedGHGFileException("Topic " + line + " cannot start with a tab.", line, sc.getLineNumber());
+            while (true) {//while we're still in the variables header block
+                line = sc.nextLine();
+                if (line.equals("---")) {
+                    break;
+                }
+                MapEntry me = FilePatterns.getHeaderVariable(line);
+                if (me == null) {
+                    throw new MalformedGHGFileException("Yaml-styled variable declaration contains an error", line, sc.getLineNumber());
+                }
+                builder.addVariable(me);
             }
             try {
-                builder.addTopic(line.trim());
-            } catch (IncompleteTopicException ex) {
-                throw new MalformedGHGFileException(ex.getTopic() + " has an error: " + ex.getMessage(), line, sc.getLineNumber());
+                builder.finalizeVariables();
+            } catch (IncompleteVariablesException ex) {
+                throw new MalformedGHGFileException("Variables declaration incomplete. " + ex.getMessage(), line, sc.getLineNumber());
             }
+            
+            line = sc.nextLine();
+            while (sc.hasNextLine()) {//grab topic
+                if (line.isEmpty()) {
+                    break;
+                }
+                if (line.charAt(0) == '\t') {
+                    throw new MalformedGHGFileException("Topic " + line + " cannot start with a tab.", line, sc.getLineNumber());
+                }
+                builder.addTopic(line.trim());
+                line = sc.nextLine();
+                while (sc.hasNextLine()) {//get requirements
+                    //System.out.println(line.charAt(0));
+                    if (line.charAt(0) != '\t' || line.isEmpty()) {
+                        break;
+                    }
+                    builder.addRequirement(line.trim());
 
+                    while (sc.hasNextLine()) {//get comments
+                        line = sc.nextLine();
+                        if (line.isEmpty() || line.charAt(0) != '\t' || !Comment.isComment(line)) {
+                            break;
+                        }
+                        builder.addComment(line.trim());
+                        line = null;
+                    }
+                }
+            }
+            return builder.build();
+        } catch (IncompleteTopicException ex) {
+            throw new MalformedGHGFileException("Topic \"" + ex.getTopic() + "\" has an error: " + ex.getMessage(), line, sc.getLineNumber());
+        } catch (IncompleteRequirementException ex) {
+            throw new MalformedGHGFileException("Requirement \"" + ex.getRequirement() + "\" has an error: " + ex.getMessage(), line, sc.getLineNumber());
         }
-        return builder.build();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Working from " + System.getProperty("user.dir"));
+        try {
+            System.out.println(GHGLoader.load("sample.ghg"));
+        } catch (FileNotFoundException ex) {
+            System.out.println("file not found: " + ex.getMessage());
+            ex.printStackTrace();
+        } catch (IncompleteGHGFileException ex) {
+            System.out.println("Incomplete GHGFile: " + ex.getMessage());
+        } catch (MalformedGHGFileException ex) {
+            System.out.println("MalformedGHGFile: " + ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 }

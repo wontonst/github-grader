@@ -29,4 +29,14 @@ public class GHGFile {
         this.variables = builder.getVariables();
         this.topics = builder.getTopics();
     }
+    @Override
+    public String toString(){
+        StringBuilder b = new StringBuilder();
+        this.variables.toString(b);
+        for(Topic t : this.topics){
+            b.append("\n");
+            t.toString(b);
+        }
+        return b.toString();
+    }
 }

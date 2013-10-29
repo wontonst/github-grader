@@ -35,4 +35,12 @@ public class Variables {
     public Set<String> keySet() {
         return this.custom_variables.keySet();
     }
+
+    public void toString(StringBuilder b) {
+        for (String k : this.custom_variables.keySet()) {
+            b.append(k + "=");
+            b.append(this.custom_variables.get(k));
+            b.append("\n");
+        }
+    }
 }

@@ -4,6 +4,7 @@
  */
 package com.wontonst.ghg.parser;
 
+import com.wontonst.ghg.exceptions.IncompleteVariablesException;
 import com.wontonst.ghg.file.Variables;
 import com.wontonst.patterns.Builder;
 import java.util.ArrayList;
@@ -28,20 +29,19 @@ public class VariablesBuilder implements Builder<Variables> {
     }
 
     @Override
-    public Variables build() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Variables build() throws IncompleteVariablesException {
+        return new Variables(this);
     }
 
     @Override
     public List<String> check() {
-
         List<String> missing = new ArrayList<String>();
         for (String s : this.mandatory_fields) {
             missing.add(s);
         }
         for (String key : this.variables.keySet()) {
-            if (missing.contains(key) && !this.variables.get(key).isEmpty()) {
-                missing.remove(key);
+            if (missing.contains(key.toUpperCase()) && !this.variables.get(key).isEmpty()) {
+                missing.remove(key.toUpperCase());
             }
         }
         return missing;

@@ -17,6 +17,11 @@ import java.util.List;
  */
 public class RequirementBuilder extends BuilderBase<Requirement> {
 
+    int value;
+
+    public int getValue() {
+        return this.value;
+    }
     List<Comment> comments = new ArrayList<Comment>();
 
     public RequirementBuilder() {
@@ -32,6 +37,11 @@ public class RequirementBuilder extends BuilderBase<Requirement> {
 
     @Override
     public Requirement build() throws IncompleteRequirementException {
+        if (!RequirementBuilder.isRequirement(this.getTitle())) {
+            throw new IncompleteRequirementException(this.getTitle(), this.getTitle() + " is not a valid requirement format.");
+        }
+        this.value = Integer.parseInt(this.title.substring(0, this.title.indexOf(":")));
+        this.title = this.title.substring(this.title.indexOf(":")+1);
         return new Requirement(this);
     }
 
@@ -42,5 +52,18 @@ public class RequirementBuilder extends BuilderBase<Requirement> {
             errors.add("title");
         }
         return errors;
+    }
+
+    public static boolean isRequirement(String s) {
+        String s2 = s.trim();
+        if (s2.indexOf(":") == -1) {
+            return false;
+        }
+        try {
+            Integer.parseInt(s2.substring(0, s2.indexOf(":")));
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+        return true;
     }
 }

@@ -19,13 +19,22 @@ public class TopicBuilder extends BuilderBase<Topic> {
 
     List<Requirement> requirements = new ArrayList<Requirement>();
     RequirementBuilder current_requirement = null;
+    int value = 0;
 
-    public void addRequirement(String s) throws IncompleteRequirementException  {
+    public void addRequirement(String s) throws IncompleteRequirementException {
         if (current_requirement != null) {
             this.requirements.add(this.current_requirement.build());
         }
         this.current_requirement = new RequirementBuilder();
         this.current_requirement.addTitle(s);
+    }
+
+    public int getValue() {
+        int v = 0;
+        for (Requirement r : requirements) {
+            v += r.getValue();
+        }
+        return v;
     }
 
     public void addComment(String s) {
@@ -37,7 +46,8 @@ public class TopicBuilder extends BuilderBase<Topic> {
     }
 
     @Override
-    public Topic build() throws IncompleteTopicException {
+    public Topic build() throws IncompleteTopicException, IncompleteRequirementException {
+        this.requirements.add(this.current_requirement.build());
         return new Topic(this);
     }
 
@@ -48,8 +58,12 @@ public class TopicBuilder extends BuilderBase<Topic> {
             errors.add("Topic does not contain a title");
         }
         if (this.requirements.isEmpty()) {
-            errors.add("Topic " + this.getTitle() + " does not contain any requirements.");
+            errors.add("Topic does not contain any requirements.");
         }
         return errors;
+    }
+
+    public int numRequirements() {
+        return this.requirements.size() + (this.current_requirement == null ? 0 : 1);
     }
 }

@@ -11,6 +11,6 @@ package com.wontonst.ghg.exceptions;
 public class MalformedGHGFileException extends GHGException {
 
     public MalformedGHGFileException(String error, String line, int line_number) {
-        super(error + " has occurred on line " + line_number + ": " + line);
+        super("Line " + line_number + "("+line+"): "+error);
     }
 }
