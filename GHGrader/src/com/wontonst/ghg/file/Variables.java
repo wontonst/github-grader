@@ -5,6 +5,7 @@
 package com.wontonst.ghg.file;
 
 import com.wontonst.ghg.exceptions.IncompleteVariablesException;
+import static com.wontonst.ghg.file.Format.GHG;
 import com.wontonst.ghg.parser.VariablesBuilder;
 import com.wontonst.util.BuildString;
 import java.util.HashMap;
@@ -36,9 +37,17 @@ public class Variables {
         return this.custom_variables.keySet();
     }
 
-    public void toString(StringBuilder b) {
+    public void toString(Format f, StringBuilder b) {
         for (String k : this.custom_variables.keySet()) {
-            b.append(k + "=");
+            switch (f) {
+                case JEKYLL_MD:
+                case JEKYLL_HTML:
+                case GHG:
+                    b.append(k + ": ");
+                    break;
+                default:
+                    break;
+            }
             b.append(this.custom_variables.get(k));
             b.append("\n");
         }

@@ -24,8 +24,18 @@ public class Comment extends Component {
         return !RequirementBuilder.isRequirement(s);
     }
 
-    public void toString(StringBuilder b) {
-        b.append("\t\t");
+    @Override
+    public void toString(Format f, StringBuilder b) {
+        switch (f) {
+            case MD:
+                b.append("    + ");
+                break;
+            case GHG:
+                b.append("\t\t");
+                break;
+        }
         b.append(this.title);
     }
+
+
 }

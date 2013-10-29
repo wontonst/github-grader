@@ -31,15 +31,29 @@ public class Requirement extends Component {
     public int getValue() {
         return this.value;
     }
-    public void toString(StringBuilder b){
-        b.append("\t");
-        b.append(this.value);
-        b.append(":");
+
+    @Override
+    public void toString(Format f, StringBuilder b) {
+        switch (f) {
+            case MD:
+            case JEKYLL_MD:
+            case JEKYLL_HTML:
+            case HTML:
+                b.append("  - _**(");
+                b.append(this.value);
+                b.append(this.value == 1 ? " point" : " points");
+                b.append("**_)");
+                break;
+            case GHG:
+                b.append("\t");
+                b.append(this.value);
+                b.append(": ");
+        }
         b.append(this.title);
-       // b.append("\n");
-        for(Comment c : this.comments){
+        // b.append("\n");
+        for (Comment c : this.comments) {
             b.append("\n");
-            c.toString(b);
+            c.toString(f,b);
         }
     }
 }

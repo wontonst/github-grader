@@ -11,6 +11,7 @@ import com.wontonst.ghg.exceptions.IncompleteTopicException;
 import com.wontonst.ghg.exceptions.IncompleteVariablesException;
 import com.wontonst.ghg.exceptions.MalformedGHGFileException;
 import com.wontonst.ghg.file.Comment;
+import com.wontonst.ghg.file.Format;
 import com.wontonst.patterns.Singleton;
 import java.io.FileNotFoundException;
 
@@ -109,7 +110,13 @@ public class GHGLoader extends Singleton {
     public static void main(String[] args) {
         System.out.println("Working from " + System.getProperty("user.dir"));
         try {
-            System.out.println(GHGLoader.load("sample.ghg"));
+            GHGFile f = GHGLoader.load("sample.ghg");
+            System.out.println("---GHG---");
+            System.out.println(f.toString(Format.GHG));
+            System.out.println("---MD---");
+            System.out.println(f.toString(Format.MD));
+            System.out.println("---HTML---");
+            System.out.println(f.toString(Format.HTML));
         } catch (FileNotFoundException ex) {
             System.out.println("file not found: " + ex.getMessage());
             ex.printStackTrace();

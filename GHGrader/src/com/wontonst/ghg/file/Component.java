@@ -12,5 +12,5 @@ public abstract class Component {
 
     protected String title;
 
-    public abstract String toString(Format f);
+    public abstract void toString(Format f, StringBuilder b);
 }

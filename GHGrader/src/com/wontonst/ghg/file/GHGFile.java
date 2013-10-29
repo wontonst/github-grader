@@ -32,40 +32,35 @@ public class GHGFile {
 
     public String toString(Format f) {
         StringBuilder b = new StringBuilder();
-
+        String header = "";
+        String body;
         switch (f) {
-            case MD:
-            case HTML:
+            case GHG:
             case JEKYLL_MD:
             case JEKYLL_HTML:
+                this.variables.toString(f, b);
+                header = b.toString();
+                b = new StringBuilder();
+                break;
         }
-        this.variables.toString(b);
-
         for (Topic t : this.topics) {
             b.append("\n");
-            t.toString(b);
+            t.toString(f, b);
         }
-        return b.toString();
-    }
-
-    public String toMd() {
-        StringBuilder b = new StringBuilder();
-        for (Topic t : this.topics) {
-            b.append(t.toMd());
-            b.append("\n");
+        body = b.toString();
+        switch (f) {
+            case HTML:
+            case JEKYLL_HTML:
+                body = body;//TODO: CONVERT TO HTML HERE!!!!
         }
-        return b.toString();
-    }
 
-    public String toJson() {
-    }
-
-    public String toHtml() {
-    }
-
-    public String toJekyllMd() {
-    }
-
-    public String toJekyllHtml() {
+        switch (f) {
+            case GHG:
+            case JEKYLL_MD:
+            case JEKYLL_HTML:
+                return header + body;
+            default:
+                return body;
+        }
     }
 }

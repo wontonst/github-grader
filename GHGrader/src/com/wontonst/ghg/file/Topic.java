@@ -27,11 +27,28 @@ public class Topic extends Component {
         this.requirements = builder.getRequirements();
         this.value = builder.getValue();
     }
-    public void toString(StringBuilder b){
-           b.append(this.title);
-           for(Requirement r : this.requirements){
-               b.append("\n");
-               r.toString(b);
-           }
+
+    @Override
+    public void toString(Format f, StringBuilder b) {
+        switch (f) {
+            case MD:
+            case HTML:
+            case JEKYLL_HTML:
+            case JEKYLL_MD:
+                b.append("###");
+                b.append(this.title);
+                b.append(" [");
+                b.append(this.value);
+                b.append(this.value == 1 ? " point" : " points");
+                b.append("]");
+                break;
+            case GHG:
+                b.append(this.title);
+                break;
+        }
+        for (Requirement r : this.requirements) {
+            b.append("\n");
+            r.toString(f, b);
+        }
     }
 }
