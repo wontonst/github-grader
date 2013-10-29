@@ -39,17 +39,29 @@ public class Menu extends JMenuBar {
         this.file.add(this.save_as);
         this.file.add(this.quit);
 
+        this.add(this.file);
+
         this.github = new JMenu("Github");
         this.github.setMnemonic(KeyEvent.VK_G);
 
         this.login = new JMenuItem("Login", KeyEvent.VK_L);
-        this.upload = new JMenuItem("Upload", KeyEvent.U);
-        
+        this.upload = new JMenuItem("Upload", KeyEvent.VK_U);
+
         this.github.add(this.login);
         this.github.add(this.upload);
 
-        this.add(this.file);
+        this.add(this.github);
 
+        this.statistics = new JMenu("Statistics");
+        this.statistics.setMnemonic(KeyEvent.VK_S);
+
+        this.general = new JMenuItem("General", KeyEvent.VK_G);
+        this.deductions = new JMenuItem("Deductions", KeyEvent.VK_D);
+
+        this.statistics.add(this.general);
+        this.statistics.add(this.deductions);
+
+        this.add(this.statistics);
     }
 
     public boolean objIsOpen(Object o) {
@@ -66,5 +78,21 @@ public class Menu extends JMenuBar {
 
     public boolean objIsSaveAs(Object o) {
         return o == this.save_as;
+    }
+
+    public boolean objIsUpload(Object o) {
+        return o == this.upload;
+    }
+
+    public boolean objIsLogin(Object o) {
+        return o == this.login;
+    }
+
+    public boolean objIsStatsGeneral(Object o) {
+        return o == this.general;
+    }
+
+    public boolean objIsStatsDeduction(Object o) {
+        return o == this.deductions;
     }
 }

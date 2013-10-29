@@ -45,7 +45,7 @@ oh wait, people speak english, not pseudocode. derp.-->
 			+ If nothing has changed, grey out
 	+ **Statistics** Menu
 		+ *General* option to view average, stddev, etc
-		+ *View deductions* - option to view most popular deductions in a pi chart.
+		+ *Deductions* - option to view most popular deductions in a pi chart.
 + Frame for inputting a list of student usernames and repository names.
 + Alternate frame for inputting a list of student repository names only.
 + GUI version of a requirement laid out for grading
