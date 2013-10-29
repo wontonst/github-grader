@@ -1,17 +1,3 @@
-#Procedure for use
-1. Rubric specified in [.ghg format][ghg] (by hand).
-2. Rubric .ghg is converted to .md or .html using [GHGrader][grader] to post up for students to view.
-2. Rubric .ghg is distributed to graders.
-3. Grader opens up [GHGrader][grader] program and opens up the .ghg file.
-3. Foreach student the grader has, the grader inputs student username and repository. (Alternative: if repo lives in a github organization, define it in rubric to replace username)
-4. Foreach student
-  + Grader grades student and then inputs each requirement grade - comment box for additional information
-  + Grader saves record.
-5. Grader presses Upload which automatically generates issues.
-6. Grader revises grade which automatically updates the grade and creates a new comment specifying what was changed and why.
-7. Grader can view average and other data in graphical form at any time after grading is complete.
-
-
 <!--
 **or just use this real-world algorithm**
 ```
@@ -30,78 +16,48 @@ function useGhg(User you, Grader[] graders, Student[] students){
 }
 ```
 oh wait, people speak english, not pseudocode. derp.-->
-#Details
-##.ghg Format
-*subject to revision before 1.0 release*
 
-Format for ghg is as followed
+#GitHub Interactions
++ Will use eclipse [eGit-Github][https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core] GitHub API library.
++ Must be able to create new issues.
++ Must be able to modify existing issues.
+	+ There must be a way of identifying issues that were created.
+	+ Alternatively, a list of issues created can be stored locally in the save file.
++ Issues contain grade information.
++ Revising grade information on an issue must create a comment stating the change effected.
 
-**Start of document has a YAML-styled variables list**
+#GUI
++ Must have menu bar
+	+ New option to open a .ghg file.
+		+ Upon opening a valid ghg file, the program will prompt for inputting student repository information.
+	+ Open option to open existing .ghd file.
+	+ Save option to save .ghd file.
+		+ Becomes save as if file hasn't been saved before.
+	+ Save as option to save as a new .ghd file.
+	+ Close option to exit program.
 
-	---
-	title: 
-	allow-negative: 
-	organization: 
-	my_var:
-	---
+#GHD Save File
 
+#GHG Format
++ Has YAML-styled header block for macros.
+	+ Header block must contain nonempty *title* field.
+	+ Nonmandatory fields:
+		+ allow-negative - allows user final score to be less than zero
+		+ organization - instead of using a username/repository pair, it will default the username to the organization.
++ Has list of Topics
+	+ Topic has a point value calculated from its requirements
+	+ Topic has list of requirements.
+	+ Topic cannot exist without at least one requirement.
++ There must be at least one topic for a valid GHG file.
++ Requirement has a point value.
+	+ Requirement point value can be negative, meaning a deduction.
+	+ Requirement has a list of comments.
+	+ Requirement does not need at least one comment.
++ Comments are simple descriptions of requirements.
 
-Mandatory variables are
-+ title - name of the assignment
-
-Non-mandatory settings variables are
-+ allow-negative: if true, the calculated score can be negative (if user's score is less than deductions) else defaults to 0
-+ organization: if this value is set, then the grader no longer needs to input a username and repo, instead it uses the organization name as the username.
-
-Custom variables may be set and accessed anywhere in the requirements by $$(my_var)
-
-**The requirements and topics declaration is simply an indented list.**
-
-The list starts with a topic followed by indented requirements. 
-Each requirement is started with an numeric (float or integer) value followed by a colon character. 
-The number represents the point value of the requirement. 
-Comments may be included after a requirement declaration.
-
-For example
-
-	Topic1
-	  2: Requirement1
-	  Comment1
-	  Comment2
-	  2: Requirement2
-	  8: Requirement3
-	Topic2
-	  10: Requirement4
-	  10: Requirement5
-
-Putting this all together, a sample ghg document would look like
-The indent is a tab (\t) character.
-
-	---
-	title: Restaurant v2.1
-	allow-negative: false
-	organization: usc-csci201-fall2013
-	required-for-each: 1: Clear documentation
-	---
-	Milestone v2.1A - Fulfill the Requirements of v2
-	  2: One customer, one waiter
-	  2: Multiple customers, one waiter
-	  $$(required-for-each)
-	Milestone v2.1B &ndash; Full Design of All 6 Agents (Cook, Waiter, Host, Customer, Cashier, Market)
-	  1: You are to develop an interaction diagram for the normative scenario.
-	  1: The interaction diagram should include message numbers, parameters, good message names.
-	  2: Full Design document for all the agents. The document must include:
-	  $$(required-for-each)
-	Deductions
-	  -10: Not using the agent methodology correctly:
-	  Shouldn't access fields/values of another agent.
-	  Shouldn't pass pointers in messages (other than agent pointers).
-	  -5: Runtime errors other than concurrent modification errors, which we ignore for now.
-
-
-##GH-Grader
+#GH-Grader
 + Can convert a .ghg into .md or .html.
-+ Can optionally add variables in yaml header block for Jekyll.
+	+ Can optionally add variables in yaml header block for Jekyll.
 + Parses .ghg and displays GUI for graders.
 + Stores grades into .ghgdata file for opening at a later date.
 + Calculates scores and average across students.
