@@ -47,7 +47,7 @@ Custom variables may be set and accessed anywhere in the requirements by $$(my_v
 
 **The requirements and topics declaration is simply an indented list.**
 
-The list starts with a topic followed by indented requirements. 
+The list starts with a topic followed by **tab indented** requirements and comments. 
 Each requirement is started with an numeric (float or integer) value followed by a colon character. 
 The number represents the point value of the requirement. 
 Comments may be included after a requirement declaration.
@@ -64,8 +64,9 @@ For example
 	  10: Requirement4
 	  10: Requirement5
 
+***Important***: **The indent is a tab (\t) character.**
+
 Putting this all together, a sample ghg document would look like
-The indent is a tab (\t) character.
 
 	---
 	title: Restaurant v2.1
