@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author RoyZheng
  */
-public class GUICore extends JFrame implements ActionListener {
+public class GuiCore extends JFrame implements ActionListener {
 
     public static int FRAME_DIM_X = 400;
     public static int FRAME_DIM_Y = 300;
@@ -33,7 +33,7 @@ public class GUICore extends JFrame implements ActionListener {
     protected Menu menu;
     protected GHGFile ghg;
 
-    public GUICore() {
+    public GuiCore() {
         this.menu = new Menu(this);
         this.setJMenuBar(this.menu);
 

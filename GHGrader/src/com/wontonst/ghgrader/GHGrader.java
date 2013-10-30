@@ -4,7 +4,7 @@
  */
 package com.wontonst.ghgrader;
 
-import com.wontonst.ghgrader.gui.GUICore;
+import com.wontonst.ghgrader.gui.GuiCore;
 import java.io.IOException;
 
 /**
@@ -18,6 +18,6 @@ public class GHGrader {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        GUICore gui = new GUICore();
+        GuiCore gui = new GuiCore();
     }
 }

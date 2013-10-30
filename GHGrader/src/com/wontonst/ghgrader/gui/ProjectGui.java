@@ -10,6 +10,6 @@ import javax.swing.JPanel;
  * Displays the grades for a single user.
  * @author RoyZheng
  */
-public class GradeDisplay extends JPanel {
+public class ProjectGui extends JPanel {
     
 }
