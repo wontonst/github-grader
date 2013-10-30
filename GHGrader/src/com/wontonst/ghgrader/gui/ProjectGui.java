@@ -10,13 +10,14 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
 /**
- * Displays the grades for a single user.
+ * Displays the grades for a project.
  *
  * @author RoyZheng
  */
 public class ProjectGui extends JPanel {
 
     Project project;///<model representation
+    List<StudentGui> students = new ArrayList<StudentGui>();
 
     public ProjectGui(Project p) {
         this.project = p;
@@ -24,7 +25,7 @@ public class ProjectGui extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        
+
         this.setLayout(new GridBagLayout());
 
     }

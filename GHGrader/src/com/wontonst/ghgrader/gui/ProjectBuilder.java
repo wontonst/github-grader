@@ -84,7 +84,6 @@ public class ProjectBuilder extends JFrame implements Builder<Project>, ActionLi
         this.done.addActionListener(this);
         this.add.addActionListener(this);
 
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
