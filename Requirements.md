@@ -102,15 +102,8 @@ oh wait, people speak english, not pseudocode. derp.-->
 	+ Requirement has a list of comments.
 	+ Requirement does not need at least one comment.
 + Comments are simple descriptions of requirements.
-
-#GH-Grader
-+ Can convert a .ghg into .md or .html.
++ GHG can be converted into md or html.
 	+ Can optionally add variables in yaml header block for Jekyll.
-+ Parses .ghg and displays GUI for graders.
-+ Stores grades into .ghgdata file for opening at a later date.
-+ Calculates scores and average across students.
-+ Interfaces with Github.
-
 
 [ghg]: #ghg-format
 [grader]: #gh-grader
