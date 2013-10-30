@@ -13,6 +13,7 @@ import com.wontonst.ghg.exceptions.MalformedGHGFileException;
 import com.wontonst.ghg.file.Comment;
 import com.wontonst.ghg.file.Format;
 import com.wontonst.patterns.Singleton;
+import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -26,8 +27,17 @@ public class GHGLoader extends Singleton {
         TOPIC, REQUIREMENT, COMMENT
     }
 
+    public static GHGFile load(File file) throws FileNotFoundException, MalformedGHGFileException, IncompleteGHGFileException {
+        GHGScanner sc = new GHGScanner(file);
+        return GHGLoader.load(sc);
+    }
+
     public static GHGFile load(String path) throws FileNotFoundException, IncompleteGHGFileException, MalformedGHGFileException {
         GHGScanner sc = new GHGScanner(path);
+        return GHGLoader.load(sc);
+    }
+
+    private static GHGFile load(GHGScanner sc) throws MalformedGHGFileException, IncompleteGHGFileException {
         FileBuilder builder = new FileBuilder();
 
         String line = sc.nextLine();

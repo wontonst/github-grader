@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Topic extends Component {
 
-    int value = 0;
+    int value = 0, input_value;
     List<Requirement> requirements;
 
     public Topic(TopicBuilder builder) throws IncompleteTopicException {

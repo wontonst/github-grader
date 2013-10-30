@@ -26,6 +26,10 @@ public class GHGScanner {
         this.scanner = new Scanner(new File(f));
     }
 
+    public GHGScanner(File f) throws FileNotFoundException {
+        this.scanner = new Scanner(f);
+    }
+
     public int getLineNumber() {
         return this.line_number;
     }
@@ -35,8 +39,7 @@ public class GHGScanner {
     }
 
     public String nextLine() {
-       line_number++;
-        //System.out.println(this.line_number);
+        line_number++;
         return this.scanner.nextLine();
     }
 }

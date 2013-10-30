@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Requirement extends Component {
 
-    int value;
+    int value, input_value;
     List<Comment> comments;
 
     public Requirement(RequirementBuilder builder) throws IncompleteRequirementException {
@@ -53,7 +53,7 @@ public class Requirement extends Component {
         // b.append("\n");
         for (Comment c : this.comments) {
             b.append("\n");
-            c.toString(f,b);
+            c.toString(f, b);
         }
     }
 }
