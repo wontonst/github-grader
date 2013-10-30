@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg.exceptions;
+package com.wontonst.ghgformat.exceptions;
 
 /**
  * Error thrown when user did not provide a validly formatted GHG file.

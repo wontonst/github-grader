@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghgrader.io;
+package com.wontonst.ghgrader.model;
 
-import com.wontonst.ghg.file.GHGFile;
+import com.wontonst.ghgformat.file.GHGFile;
 
 /**
  *

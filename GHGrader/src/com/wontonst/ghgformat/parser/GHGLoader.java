@@ -2,16 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg.parser;
+package com.wontonst.ghgformat.parser;
 
-import com.wontonst.ghg.file.GHGFile;
-import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
-import com.wontonst.ghg.exceptions.IncompleteRequirementException;
-import com.wontonst.ghg.exceptions.IncompleteTopicException;
-import com.wontonst.ghg.exceptions.IncompleteVariablesException;
-import com.wontonst.ghg.exceptions.MalformedGHGFileException;
-import com.wontonst.ghg.file.Comment;
-import com.wontonst.ghg.file.Format;
+import com.wontonst.ghgformat.file.GHGFile;
+import com.wontonst.ghgformat.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghgformat.exceptions.IncompleteRequirementException;
+import com.wontonst.ghgformat.exceptions.IncompleteTopicException;
+import com.wontonst.ghgformat.exceptions.IncompleteVariablesException;
+import com.wontonst.ghgformat.exceptions.MalformedGHGFileException;
+import com.wontonst.ghgformat.file.Comment;
+import com.wontonst.ghgformat.file.Format;
 import com.wontonst.patterns.Singleton;
 import java.io.File;
 import java.io.FileNotFoundException;

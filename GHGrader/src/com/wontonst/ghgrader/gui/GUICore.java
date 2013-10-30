@@ -4,10 +4,10 @@
  */
 package com.wontonst.ghgrader.gui;
 
-import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
-import com.wontonst.ghg.exceptions.MalformedGHGFileException;
-import com.wontonst.ghg.file.GHGFile;
-import com.wontonst.ghg.parser.GHGLoader;
+import com.wontonst.ghgformat.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghgformat.exceptions.MalformedGHGFileException;
+import com.wontonst.ghgformat.file.GHGFile;
+import com.wontonst.ghgformat.parser.GHGLoader;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;

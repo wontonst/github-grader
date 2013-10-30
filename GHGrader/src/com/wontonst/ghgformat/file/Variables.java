@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg.file;
+package com.wontonst.ghgformat.file;
 
-import com.wontonst.ghg.exceptions.IncompleteVariablesException;
-import static com.wontonst.ghg.file.Format.GHG;
-import com.wontonst.ghg.parser.VariablesBuilder;
+import com.wontonst.ghgformat.exceptions.IncompleteVariablesException;
+import static com.wontonst.ghgformat.file.Format.GHG;
+import com.wontonst.ghgformat.parser.VariablesBuilder;
 import com.wontonst.util.BuildString;
 import java.util.HashMap;
 import java.util.List;

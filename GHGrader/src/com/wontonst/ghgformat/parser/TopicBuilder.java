@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg.parser;
+package com.wontonst.ghgformat.parser;
 
-import com.wontonst.ghg.exceptions.IncompleteRequirementException;
-import com.wontonst.ghg.exceptions.IncompleteTopicException;
-import com.wontonst.ghg.file.Requirement;
-import com.wontonst.ghg.file.Topic;
+import com.wontonst.ghgformat.exceptions.IncompleteRequirementException;
+import com.wontonst.ghgformat.exceptions.IncompleteTopicException;
+import com.wontonst.ghgformat.file.Requirement;
+import com.wontonst.ghgformat.file.Topic;
 import java.util.ArrayList;
 import java.util.List;
 

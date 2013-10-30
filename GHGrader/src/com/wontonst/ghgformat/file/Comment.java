@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg.file;
+package com.wontonst.ghgformat.file;
 
-import com.wontonst.ghg.parser.RequirementBuilder;
+import com.wontonst.ghgformat.parser.RequirementBuilder;
 
 /**
  *

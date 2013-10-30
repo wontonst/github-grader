@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wontonst.ghg.file;
+package com.wontonst.ghgformat.file;
 
-import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
-import com.wontonst.ghg.parser.FileBuilder;
+import com.wontonst.ghgformat.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghgformat.parser.FileBuilder;
 import com.wontonst.util.BuildString;
 import java.util.List;
 import java.util.Map;
