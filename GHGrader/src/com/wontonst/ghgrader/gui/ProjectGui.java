@@ -7,6 +7,8 @@ package com.wontonst.ghgrader.gui;
 import com.wontonst.ghgrader.model.Project;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**

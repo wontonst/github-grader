@@ -4,10 +4,17 @@
  */
 package com.wontonst.ghgrader.gui;
 
+import com.wontonst.ghgrader.model.Student;
+
 /**
  *
  * @author RoyZheng
  */
 public class StudentGui {
-    
+
+    Student student;
+
+    public StudenGui(Student s) {
+        this.student = s;
+    }
 }
