@@ -36,13 +36,14 @@ oh wait, people speak english, not pseudocode. derp.-->
 			+ Becomes save as if file hasn't been saved before.
 		+ *Save as* option to save as a new .ghd file.
 		+ *Close* option to exit program.
-	+ **GitHub** menu
+	+ **Perform** menu
 		+ *Login* option to log the user in.
 		+ *Upload* option to create new issue for the current student.
 			+ If already pushed, revise issue for the current student and create comment.
 			+ If not already pushed, create new issue.
 			+ If not completely graded, display error
 			+ If nothing has changed, grey out
+		+ *Edit Project* option to change usernames/repo/add/etc
 	+ **Statistics** Menu
 		+ *General* option to view average, stddev, etc
 		+ *Deductions* - option to view most popular deductions in a pi chart.

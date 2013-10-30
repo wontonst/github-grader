@@ -7,7 +7,7 @@ package com.wontonst.ghgrader.model;
 import com.wontonst.ghgformat.file.GHGFile;
 
 /**
- *
+ * Abstraction of a single student.
  * @author RoyZheng
  */
 public class Student {

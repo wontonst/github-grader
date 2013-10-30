@@ -18,8 +18,8 @@ public class Menu extends JMenuBar {
 
     protected JMenu file;
     protected JMenuItem open, save, save_as, newp, quit;
-    protected JMenu github;
-    protected JMenuItem login, upload;
+    protected JMenu perform;
+    protected JMenuItem login, upload, editp;
     protected JMenu statistics;
     protected JMenuItem general, deductions;
     protected ActionListener listener;
@@ -36,7 +36,7 @@ public class Menu extends JMenuBar {
         this.save = new JMenuItem("Save", KeyEvent.VK_S);
         this.save_as = new JMenuItem("Save as", KeyEvent.VK_A);
         this.quit = new JMenuItem("Quit", KeyEvent.VK_Q);
-        
+
         this.newp.setToolTipText("Create a new project from an existing ghg file");
         this.open.setToolTipText("Open a previous ghg grading project");
 
@@ -54,19 +54,22 @@ public class Menu extends JMenuBar {
 
         this.add(this.file);
 
-        this.github = new JMenu("Github");
-        this.github.setMnemonic(KeyEvent.VK_G);
+        this.perform = new JMenu("Github");
+        this.perform.setMnemonic(KeyEvent.VK_G);
 
         this.login = new JMenuItem("Login", KeyEvent.VK_L);
         this.upload = new JMenuItem("Upload", KeyEvent.VK_U);
+        this.editp = new JMenuItem("Edit project", KeyEvent.VK_E);
 
         this.login.addActionListener(this.listener);
         this.upload.addActionListener(this.listener);
+        this.editp.addActionListener(this.listener);
 
-        this.github.add(this.login);
-        this.github.add(this.upload);
+        this.perform.add(this.login);
+        this.perform.add(this.upload);
+        this.perform.add(this.editp);
 
-        this.add(this.github);
+        this.add(this.perform);
 
         this.statistics = new JMenu("Statistics");
         this.statistics.setMnemonic(KeyEvent.VK_S);
@@ -101,6 +104,10 @@ public class Menu extends JMenuBar {
 
     public boolean objIsSaveAs(Object o) {
         return o == this.save_as;
+    }
+
+    public boolean objIsEditProject(Object o) {
+        return o == this.upload;
     }
 
     public boolean objIsUpload(Object o) {
