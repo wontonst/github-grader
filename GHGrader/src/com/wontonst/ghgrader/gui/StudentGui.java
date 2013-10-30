@@ -14,7 +14,7 @@ public class StudentGui {
 
     Student student;
 
-    public StudenGui(Student s) {
+    public StudentGui(Student s) {
         this.student = s;
     }
 }
