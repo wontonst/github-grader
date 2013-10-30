@@ -79,9 +79,8 @@ public class ProjectBuilder extends JFrame implements Builder<Project>, ActionLi
             InputFields ifs = new InputFields(this.organization == null ? "" : this.organization, "");
             this.scroll_view.add(ifs.username);
             this.scroll_view.add(ifs.repository);
-            if (this.organization != null) {
-                ifs.username.setEditable(false);
-            }
+            if(this.organization != null)
+           ifs.username.setEditable(false);
             this.input.add(ifs);
             return;
         }

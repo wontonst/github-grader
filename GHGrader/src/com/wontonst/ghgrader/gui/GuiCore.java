@@ -8,6 +8,7 @@ import com.wontonst.ghgformat.exceptions.IncompleteGHGFileException;
 import com.wontonst.ghgformat.exceptions.MalformedGHGFileException;
 import com.wontonst.ghgformat.file.GHGFile;
 import com.wontonst.ghgformat.parser.GHGLoader;
+import com.wontonst.ghgrader.model.Project;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,8 @@ public class GuiCore extends JFrame implements ActionListener {
     protected JFileChooser file_chooser = new JFileChooser();
     protected Menu menu;
     protected GHGFile ghg;
+    protected Project project = null;
+    protected ProjectBuilder project_builder = null;
 
     public GuiCore() {
         this.menu = new Menu(this);
@@ -52,7 +55,7 @@ public class GuiCore extends JFrame implements ActionListener {
                 try {
                     GHGFile file = GHGLoader.load(f);
                     this.setVisible(false);
-                    ProjectBuilder b = new ProjectBuilder(this,this.ghg.getVariables().get("organization"));
+                    this.project_builder = new ProjectBuilder(this, this.ghg.getVariables().get("organization"));
                 } catch (FileNotFoundException ex) {//NOT TRUE
                     JOptionPane.showMessageDialog(this, "File could not be found!");
                 } catch (MalformedGHGFileException ex) {
@@ -77,6 +80,15 @@ public class GuiCore extends JFrame implements ActionListener {
                 //parse ghd file
             }
             return;
+        }
+    }
+
+    public void projectBuildDone() {
+        this.setVisible(true);
+        try {
+            this.project = this.project_builder.build();
+        } catch (Exception ex) {
+            //TODO: not sure what to do yet
         }
     }
 }
