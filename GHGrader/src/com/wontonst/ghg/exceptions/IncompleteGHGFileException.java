@@ -7,7 +7,7 @@ package com.wontonst.ghg.exceptions;
 import java.util.List;
 
 /**
- *
+ * Exception that should only get thrown if the programmer of this program made an error.
  * @author RoyZheng
  */
 public class IncompleteGHGFileException extends GHGException {

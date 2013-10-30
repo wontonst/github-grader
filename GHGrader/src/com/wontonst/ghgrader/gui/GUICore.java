@@ -4,6 +4,8 @@
  */
 package com.wontonst.ghgrader.gui;
 
+import com.wontonst.ghg.exceptions.IncompleteGHGFileException;
+import com.wontonst.ghg.exceptions.MalformedGHGFileException;
 import com.wontonst.ghg.file.GHGFile;
 import com.wontonst.ghg.parser.GHGLoader;
 import java.awt.Dimension;
@@ -11,8 +13,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +31,6 @@ public class GUICore extends JFrame implements ActionListener {
     protected Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     protected JFileChooser file_chooser = new JFileChooser();
     protected Menu menu;
-    
     protected GHGFile ghg;
 
     public GUICore() {
@@ -40,12 +45,23 @@ public class GUICore extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Action performed");
-        if (this.menu.objIsQuit(e.getSource())) {
+        if (this.menu.objIsNew(e.getSource())) {
             int returnv = this.file_chooser.showOpenDialog(this);
             if (returnv == JFileChooser.APPROVE_OPTION) {
                 File f = this.file_chooser.getSelectedFile();
-                GHGFile file = GHGLoader.load(f);
+                try {
+                    GHGFile file = GHGLoader.load(f);
+                } catch (FileNotFoundException ex) {
+                    JOptionPane.showMessageDialog(this, "File could not be found!");
+                } catch (MalformedGHGFileException ex) {
+                    JOptionPane.showMessageDialog(this, "Malformed .ghg file: " + ex.getMessage());
+                } catch (IncompleteGHGFileException ex) {
+                    JOptionPane.showMessageDialog(this, "CRITICAL ERROR! " + ex.getMessage());
+                }
             }
+            return;
+        }
+        if (this.menu.objIsQuit(e.getSource())) {
             return;
         }
         if (this.menu.objIsSave(e.getSource())) {
@@ -56,6 +72,7 @@ public class GUICore extends JFrame implements ActionListener {
             int returnv = this.file_chooser.showOpenDialog(this);
             if (returnv == JFileChooser.APPROVE_OPTION) {
                 File f = this.file_chooser.getSelectedFile();
+                //parse ghd file
             }
             return;
         }

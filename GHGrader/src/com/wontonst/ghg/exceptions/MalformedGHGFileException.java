@@ -5,7 +5,7 @@
 package com.wontonst.ghg.exceptions;
 
 /**
- *
+ * Error thrown when user did not provide a validly formatted GHG file.
  * @author RoyZheng
  */
 public class MalformedGHGFileException extends GHGException {
