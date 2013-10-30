@@ -12,6 +12,9 @@ import com.wontonst.ghgformat.parser.RequirementBuilder;
  */
 public class Comment extends Component {
 
+    private Comment() {
+    }
+
     public Comment(String s) {
         this.title = s;
     }
@@ -37,5 +40,7 @@ public class Comment extends Component {
         b.append(this.title);
     }
 
-
+    public Comment deepClone() {
+        return new Comment(this.title);
+    }
 }

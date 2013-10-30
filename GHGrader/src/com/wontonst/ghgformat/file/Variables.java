@@ -30,7 +30,7 @@ public class Variables {
     }
 
     public String get(String k) {
-        return this.custom_variables.get(k);
+        return this.custom_variables.get(k.toLowerCase());
     }
 
     public Set<String> keySet() {

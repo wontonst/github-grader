@@ -62,6 +62,8 @@ oh wait, people speak english, not pseudocode. derp.-->
 	+ Each requirement has a comment input field.
 + CardLayout with next/back with grading form for each student.
 + Information section on each CardLayout
+	+ Username
+	+ Repository
 	+ Status information displayed
 		+ (Red) NOT STARTED
 		+ (Orange) NEED UPLOAD
@@ -86,8 +88,9 @@ oh wait, people speak english, not pseudocode. derp.-->
 + Has YAML-styled header block for macros.
 	+ Header block must contain nonempty *title* field.
 	+ Non-mandatory fields:
-		+ allow-negative - allows user final score to be less than zero
-		+ organization - instead of using a username/repository pair, it will default the username to the organization.
+		+ allow-negative - allows user final score to be less than zero. Must be either true or false
+		+ organization - instead of using a username/repository pair, it will default the username to the organization. Must not be empty
+	+ All header variables will be stored in lowercase
 + Has list of Topics
 	+ Topic has a point value calculated from its requirements
 	+ Topic has list of requirements.

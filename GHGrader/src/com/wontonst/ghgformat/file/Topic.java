@@ -7,6 +7,7 @@ package com.wontonst.ghgformat.file;
 import com.wontonst.ghgformat.exceptions.IncompleteTopicException;
 import com.wontonst.ghgformat.parser.TopicBuilder;
 import com.wontonst.util.BuildString;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,9 @@ public class Topic extends Component {
 
     int value = 0, input_value;
     List<Requirement> requirements;
+
+    private Topic() {
+    }
 
     public Topic(TopicBuilder builder) throws IncompleteTopicException {
         List<String> c = builder.check();
@@ -50,5 +54,17 @@ public class Topic extends Component {
             b.append("\n");
             r.toString(f, b);
         }
+    }
+
+    public Topic deepClone() {
+        Topic t = new Topic();
+        t.value = this.value;
+        t.input_value = this.input_value;
+        List<Requirement> recs = new ArrayList<Requirement>();
+        for (Requirement r : this.requirements) {
+            recs.add(r.deepClone());
+        }
+        t.requirements = recs;
+        return t;
     }
 }

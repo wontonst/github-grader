@@ -4,12 +4,28 @@
  */
 package com.wontonst.ghgrader.gui;
 
+import com.wontonst.ghgrader.model.Project;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
 /**
  * Displays the grades for a single user.
+ *
  * @author RoyZheng
  */
 public class ProjectGui extends JPanel {
-    
+
+    Project project;///<model representation
+
+    public ProjectGui(Project p) {
+        this.project = p;
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        
+        this.setLayout(new GridBagLayout());
+
+    }
 }

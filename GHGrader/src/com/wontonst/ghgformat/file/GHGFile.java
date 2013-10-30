@@ -7,6 +7,7 @@ package com.wontonst.ghgformat.file;
 import com.wontonst.ghgformat.exceptions.IncompleteGHGFileException;
 import com.wontonst.ghgformat.parser.FileBuilder;
 import com.wontonst.util.BuildString;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,9 @@ public class GHGFile {
     Variables variables;
     List<Topic> topics;
 
+    private GHGFile() {
+    }
+
     public GHGFile(FileBuilder builder) throws IncompleteGHGFileException {
         StringBuilder sb = new StringBuilder();
         List<String> checked = builder.check();
@@ -28,6 +32,10 @@ public class GHGFile {
 
         this.variables = builder.getVariables();
         this.topics = builder.getTopics();
+    }
+
+    public Variables getVariables() {
+        return this.variables;
     }
 
     public String toString(Format f) {
@@ -62,5 +70,15 @@ public class GHGFile {
             default:
                 return body;
         }
+    }
+
+    public GHGFile deepClone() {
+        GHGFile f = new GHGFile();
+        List<Topic> top = new ArrayList<Topic>();
+        for (Topic t : this.topics) {
+            top.add(t.deepClone());
+        }
+        f.topics = top;
+        return f;
     }
 }

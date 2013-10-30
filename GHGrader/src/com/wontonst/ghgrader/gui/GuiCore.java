@@ -28,7 +28,7 @@ public class GuiCore extends JFrame implements ActionListener {
 
     public static int FRAME_DIM_X = 400;
     public static int FRAME_DIM_Y = 300;
-    protected Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    protected static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     protected JFileChooser file_chooser = new JFileChooser();
     protected Menu menu;
     protected GHGFile ghg;
@@ -38,7 +38,7 @@ public class GuiCore extends JFrame implements ActionListener {
         this.setJMenuBar(this.menu);
 
         this.setSize(FRAME_DIM_X, FRAME_DIM_Y);
-        this.setLocation(this.screenSize.width / 2 - FRAME_DIM_X / 2, this.screenSize.height / 2 - FRAME_DIM_Y / 2);
+        this.setLocation(GuiCore.screenSize.width / 2 - FRAME_DIM_X / 2, GuiCore.screenSize.height / 2 - FRAME_DIM_Y / 2);
         this.setVisible(true);
     }
 
@@ -51,7 +51,9 @@ public class GuiCore extends JFrame implements ActionListener {
                 File f = this.file_chooser.getSelectedFile();
                 try {
                     GHGFile file = GHGLoader.load(f);
-                } catch (FileNotFoundException ex) {
+                    this.setVisible(false);
+                    ProjectBuilder b = new ProjectBuilder(this,this.ghg.getVariables().get("organization"));
+                } catch (FileNotFoundException ex) {//NOT TRUE
                     JOptionPane.showMessageDialog(this, "File could not be found!");
                 } catch (MalformedGHGFileException ex) {
                     JOptionPane.showMessageDialog(this, "Malformed .ghg file: " + ex.getMessage());

@@ -45,6 +45,8 @@ Non-mandatory settings variables are
 
 Custom variables may be set and accessed anywhere in the requirements by $$(my_var)
 
+Note that since variables are not case sensitive, having variables *myVar* and *MyVar* will cause one of them to become overwritten.
+
 **The requirements and topics declaration is simply an indented list.**
 
 The list starts with a topic followed by **tab indented** requirements and comments. 

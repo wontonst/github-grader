@@ -13,10 +13,10 @@ import com.wontonst.ghgformat.file.GHGFile;
 public class Student {
 
     GHGFile file;
-    protected String repo_name, username;
+    protected StudentInfo info;
 
-    public Student(GHGFile f, String repository, String usr) {
-        this.repo_name = repository;
-        this.username = usr;
+    public Student(GHGFile f, StudentInfo info) {
+        this.file = f.deepClone();
+        this.info = info;
     }
 }
