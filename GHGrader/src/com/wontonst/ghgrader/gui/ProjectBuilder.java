@@ -15,10 +15,13 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -28,7 +31,7 @@ import javax.swing.JTextField;
  *
  * @author RoyZheng
  */
-public class ProjectBuilder extends JFrame implements Builder<Project>, ActionListener {
+public class ProjectBuilder extends JFrame implements Builder<Project>, ActionListener, KeyListener {
 
     class InputFields {
 
@@ -87,15 +90,24 @@ public class ProjectBuilder extends JFrame implements Builder<Project>, ActionLi
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
+        this.panel.add(new JLabel("Username"),constraints);
+        constraints.gridx = 1;
+        this.panel.add(new JLabel("Repository"),constraints);
+        constraints.gridx = 0;
+        constraints.gridy= 1;
         constraints.weightx = 1;
+        constraints.gridwidth = 2;
         constraints.fill = GridBagConstraints.BOTH;
         this.panel.add(this.scroll, constraints);
-        constraints.gridy = 1;
-        this.panel.add(this.add, constraints);
         constraints.gridy = 2;
+        this.panel.add(this.add, constraints);
+        constraints.gridy = 3;
         this.panel.add(this.done, constraints);
         this.add(this.panel);
         this.setVisible(true);
+        
+        
+        this.addKeyListener(this);
     }
 
     public void finish() {
@@ -127,6 +139,24 @@ public class ProjectBuilder extends JFrame implements Builder<Project>, ActionLi
         return errors;
     }
 
+    public void addRow() {
+
+        InputFields ifs = new InputFields(this.organization == null ? "" : this.organization, "");
+        this.scroll_view.add(ifs.username, this.gbc);
+        this.gbc.gridx = 1;
+        this.scroll_view.add(ifs.repository, this.gbc);
+        this.gbc.gridx = 0;
+        this.gbc.gridy = this.gbc.gridy + 1;
+        if (this.organization != null) {
+            ifs.username.setEditable(false);
+        }// else {
+        //     ifs.username.setColumns(20);
+        //  }
+        //ifs.repository.setColumns(20);
+        this.input.add(ifs);
+        this.revalidate();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.done) {
@@ -135,21 +165,24 @@ public class ProjectBuilder extends JFrame implements Builder<Project>, ActionLi
             return;
         }
         if (e.getSource() == this.add) {
-            InputFields ifs = new InputFields(this.organization == null ? "" : this.organization, "");
-            this.scroll_view.add(ifs.username, this.gbc);
-            this.gbc.gridx = 1;
-            this.scroll_view.add(ifs.repository, this.gbc);
-            this.gbc.gridx = 0;
-            this.gbc.gridy = this.gbc.gridy + 1;
-            if (this.organization != null) {
-                ifs.username.setEditable(false);
-            }// else {
-            //     ifs.username.setColumns(20);
-            //  }
-            //ifs.repository.setColumns(20);
-            this.input.add(ifs);
-            this.revalidate();
+            this.addRow();
             return;
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_A) {
+            this.addRow();
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }
