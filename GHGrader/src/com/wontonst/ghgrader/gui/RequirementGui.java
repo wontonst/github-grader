@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +26,7 @@ public class RequirementGui extends JPanel implements ActionListener {
     protected JButton remove_all;
     protected JLabel field;
 
-    public RequirementGui(Requirement r) {
+    public RequirementGui(Requirement r, List<CommentGui> comments) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -34,29 +35,37 @@ public class RequirementGui extends JPanel implements ActionListener {
         this.add(new JLabel(r.getTitle() + "(" + r.getValue() + (r.getValue() <= 1 ? " point)" : " points)")), gbc);
 
 
-        gbc.gridy = 1;
+        gbc.gridx = 1;
         this.add_all = new JButton("++");
         this.add_all.addActionListener(this);
         this.add(this.add_all, gbc);
 
-        gbc.gridy = 2;
+        gbc.gridx = 2;
         this.add_one = new JButton("+");
         this.add_one.addActionListener(this);
         this.add(this.add_one, gbc);
 
-        gbc.gridy = 3;
+        gbc.gridx = 3;
         this.field = new JLabel("x");
         this.add(this.field, gbc);
 
-        gbc.gridy = 4;
+        gbc.gridx = 4;
         this.remove_one = new JButton("-");
         this.remove_one.addActionListener(this);
         this.add(this.remove_one, gbc);
 
-        gbc.gridy = 5;
+        gbc.gridx = 5;
         this.remove_all = new JButton("--");
         this.remove_all.addActionListener(this);
         this.add(this.remove_all, gbc);
+        
+        gbc.gridy= 1;
+        gbc.gridx = 1;
+        gbc.gridwidth = 5;
+        for(CommentGui c : comments){
+            this.add(c);
+            gbc.gridy = gbc.gridy + 1;
+        }
     }
 
     @Override

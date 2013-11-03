@@ -6,6 +6,7 @@ package com.wontonst.ghgformat.file;
 
 import com.wontonst.ghgformat.exceptions.IncompleteRequirementException;
 import com.wontonst.ghgformat.parser.RequirementBuilder;
+import com.wontonst.ghgrader.gui.CommentGui;
 import com.wontonst.ghgrader.gui.RequirementGui;
 import com.wontonst.util.BuildString;
 import java.util.ArrayList;
@@ -16,13 +17,13 @@ import java.util.List;
  * @author RoyZheng
  */
 public class Requirement extends Component {
-
+    
     int value, input_value;
     List<Comment> comments;
-
+    
     private Requirement() {
     }
-
+    
     public Requirement(RequirementBuilder builder) throws IncompleteRequirementException {
         List<String> c = builder.check();
         if (c != null && !c.isEmpty()) {
@@ -32,19 +33,23 @@ public class Requirement extends Component {
         this.comments = builder.getComments();
         this.value = builder.getValue();
     }
-
+    
     public void setInputValue(int i) {
         this.input_value = i;
     }
-
+    
     public int getValue() {
         return this.value;
     }
-
+    
     public RequirementGui toPanel() {
-        return new RequirementGui(this);
+        List<CommentGui> c = new ArrayList<CommentGui>();
+        for (Comment cm : this.comments) {
+            c.add(cm.toPanel());
+        }
+        return new RequirementGui(this,c);
     }
-
+    
     @Override
     public void toString(Format f, StringBuilder b) {
         switch (f) {
@@ -69,7 +74,7 @@ public class Requirement extends Component {
             c.toString(f, b);
         }
     }
-
+    
     public Requirement deepClone() {
         Requirement r = new Requirement();
         r.value = this.value;

@@ -4,10 +4,16 @@
  */
 package com.wontonst.ghgrader.gui;
 
+import com.wontonst.ghgformat.file.Topic;
+import java.util.List;
+import javax.swing.JPanel;
+
 /**
  *
  * @author RoyZheng
  */
-public class TopicGui {
-    
+public class TopicGui extends JPanel {
+
+    public TopicGui(Topic topic, List<RequirementGui> reqs) {
+    }
 }

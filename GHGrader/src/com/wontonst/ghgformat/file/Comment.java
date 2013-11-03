@@ -5,6 +5,7 @@
 package com.wontonst.ghgformat.file;
 
 import com.wontonst.ghgformat.parser.RequirementBuilder;
+import com.wontonst.ghgrader.gui.CommentGui;
 import javax.swing.JPanel;
 
 /**

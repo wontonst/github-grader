@@ -6,9 +6,12 @@ package com.wontonst.ghgformat.file;
 
 import com.wontonst.ghgformat.exceptions.IncompleteTopicException;
 import com.wontonst.ghgformat.parser.TopicBuilder;
+import com.wontonst.ghgrader.gui.RequirementGui;
+import com.wontonst.ghgrader.gui.TopicGui;
 import com.wontonst.util.BuildString;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
 
 /**
  *
@@ -66,5 +69,14 @@ public class Topic extends Component {
         }
         t.requirements = recs;
         return t;
+    }
+
+    @Override
+    public TopicGui toPanel() {
+        List<RequirementGui> rgui = new ArrayList<RequirementGui>();
+        for (Requirement r : this.requirements) {
+            rgui.add(r.toPanel());
+        }
+        return new TopicGui(this, rgui);
     }
 }
