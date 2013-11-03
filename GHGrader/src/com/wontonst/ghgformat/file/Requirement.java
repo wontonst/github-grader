@@ -6,6 +6,7 @@ package com.wontonst.ghgformat.file;
 
 import com.wontonst.ghgformat.exceptions.IncompleteRequirementException;
 import com.wontonst.ghgformat.parser.RequirementBuilder;
+import com.wontonst.ghgrader.gui.RequirementGui;
 import com.wontonst.util.BuildString;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,16 @@ public class Requirement extends Component {
         this.value = builder.getValue();
     }
 
+    public void setInputValue(int i) {
+        this.input_value = i;
+    }
+
     public int getValue() {
         return this.value;
+    }
+
+    public RequirementGui toPanel() {
+        return new RequirementGui(this);
     }
 
     @Override
@@ -66,10 +75,10 @@ public class Requirement extends Component {
         r.value = this.value;
         r.input_value = this.input_value;
         List<Comment> comm = new ArrayList<Comment>();
-        for(Comment c : this.comments){
+        for (Comment c : this.comments) {
             comm.add(c.deepClone());
         }
-       r.comments=comm;
+        r.comments = comm;
         return r;
     }
 }

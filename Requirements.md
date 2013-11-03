@@ -51,6 +51,9 @@ oh wait, people speak english, not pseudocode. derp.-->
 + Alternate frame for inputting a list of student repository names only.
 + GUI version of a requirement laid out for grading
 	+ Each requirement has 3 buttons next to it
+		+ Add all
+			+ For positive point value requirements, sets to max point value.
+			+ For negative point value requirements, sets to zero.
 		+ Add 1 point
 			+ For positive point value requirements, cannot exceed max requirement points.
 			+ For negative point value requirements, cannot exceed 0.

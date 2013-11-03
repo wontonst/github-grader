@@ -5,6 +5,7 @@
 package com.wontonst.ghgformat.file;
 
 import com.wontonst.ghgformat.parser.RequirementBuilder;
+import javax.swing.JPanel;
 
 /**
  *
@@ -42,5 +43,10 @@ public class Comment extends Component {
 
     public Comment deepClone() {
         return new Comment(this.title);
+    }
+
+    @Override
+    public CommentGui toPanel() {
+        return new CommentGui(this);
     }
 }

@@ -5,6 +5,7 @@
 package com.wontonst.ghgrader.gui;
 
 import com.wontonst.ghgrader.model.Student;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,5 +17,6 @@ public class StudentGui extends JPanel {
 
     public StudentGui(Student s) {
         this.student = s;
+        
     }
 }
