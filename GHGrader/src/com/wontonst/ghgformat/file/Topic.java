@@ -59,6 +59,7 @@ public class Topic extends Component {
         }
     }
 
+    @Override
     public Topic deepClone() {
         Topic t = new Topic();
         t.value = this.value;

@@ -27,8 +27,8 @@ import javax.swing.JOptionPane;
  */
 public class GuiCore extends JFrame implements ActionListener, KeyListener {
 
-    public static int FRAME_DIM_X = 400;
-    public static int FRAME_DIM_Y = 300;
+    public static int FRAME_DIM_X = 800;
+    public static int FRAME_DIM_Y = 600;
     protected static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     protected JFileChooser file_chooser = new JFileChooser();
     protected Menu menu;

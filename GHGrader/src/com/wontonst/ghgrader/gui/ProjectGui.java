@@ -6,6 +6,7 @@ package com.wontonst.ghgrader.gui;
 
 import com.wontonst.ghgrader.model.Project;
 import com.wontonst.ghgrader.model.Student;
+import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ProjectGui extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
 
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new CardLayout());
 
         for (StudentGui s : gui) {
             this.add(s);
