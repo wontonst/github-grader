@@ -5,6 +5,7 @@
 package com.wontonst.ghgrader.gui;
 
 import com.wontonst.ghgrader.model.Project;
+import com.wontonst.ghgrader.model.Student;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ProjectGui extends JPanel {
     Project project;///<model representation
     List<StudentGui> students = new ArrayList<StudentGui>();
 
-    public ProjectGui(Project p) {
+    public ProjectGui(Project p, List<StudentGui> gui) {
         this.project = p;
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -30,5 +31,8 @@ public class ProjectGui extends JPanel {
 
         this.setLayout(new GridBagLayout());
 
+        for (StudentGui s : gui) {
+            this.add(s);
+        }
     }
 }

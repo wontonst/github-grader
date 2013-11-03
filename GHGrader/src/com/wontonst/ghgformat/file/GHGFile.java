@@ -6,6 +6,7 @@ package com.wontonst.ghgformat.file;
 
 import com.wontonst.ghgformat.exceptions.IncompleteGHGFileException;
 import com.wontonst.ghgformat.parser.FileBuilder;
+import com.wontonst.ghgrader.gui.TopicGui;
 import com.wontonst.util.BuildString;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,14 @@ public class GHGFile {
             default:
                 return body;
         }
+    }
+
+    public List<TopicGui> getTopicGuis() {
+        List<TopicGui> t = new ArrayList<TopicGui>();
+        for (Topic top : this.topics) {
+            t.add(top.toPanel());
+        }
+        return t;
     }
 
     public GHGFile deepClone() {

@@ -74,6 +74,8 @@ public class GuiCore extends JFrame implements ActionListener, KeyListener {
             this.project_builder.finish();
             this.project_builder = null;
             this.setVisible(true);
+            this.add(this.project.toPanel());
+
         } catch (Exception ex) {
             //TODO: not sure what to do yet
         }
