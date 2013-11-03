@@ -10,7 +10,7 @@ import com.wontonst.ghgrader.model.Student;
  *
  * @author RoyZheng
  */
-public class StudentGui {
+public class StudentGui extends JPanel {
 
     Student student;
 
